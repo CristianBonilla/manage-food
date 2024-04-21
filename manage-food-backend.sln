@@ -12,9 +12,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D0A6E4EA-1E1A-4638-9F63-3A19008F5EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.API", "ManageFood.API\ManageFood.API.csproj", "{055447E9-4324-4861-8CA0-3CFEA8EF1894}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{055447E9-4324-4861-8CA0-3CFEA8EF1894} = {D0A6E4EA-1E1A-4638-9F63-3A19008F5EA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {062F0931-DE0A-4EA1-B912-98F8597BF27B}
