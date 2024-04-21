@@ -3,13 +3,17 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 910
+EXPOSE 577
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ManageFood.API/ManageFood.API.csproj", "ManageFood.API/"]
+COPY ["ManageFood.Contracts/ManageFood.Contracts.csproj", "ManageFood.Contracts/"]
+COPY ["ManageFood.Domain.Entities/ManageFood.Domain.Entities.csproj", "ManageFood.Domain.Entities/"]
+COPY ["ManageFood.Domain/ManageFood.Domain.csproj", "ManageFood.Domain/"]
+COPY ["ManageFood.Infrastructure/ManageFood.Infrastructure.csproj", "ManageFood.Infrastructure/"]
 RUN dotnet restore "./ManageFood.API/ManageFood.API.csproj"
 COPY . .
 WORKDIR "/src/ManageFood.API"

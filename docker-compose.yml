@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  managefood.api:
+    image: ${DOCKER_REGISTRY-}managefoodapi
+    container_name: 'manage-food-API'
+    build:
+      context: .
+      dockerfile: ManageFood.API/Dockerfile
+    depends_on:
+      - sqlserver
+    links:
+      - sqlserver
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: 'sql-server'
+    hostname: 'sql-server'
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: 'Express'
+      MSSQL_USER: 'sa'
+      MSSQL_SA_PASSWORD: 'ManageFood__Password'
+    ports:
+      - '1433:1433'
+    expose:
+      - 1433
+
+networks:
+  default:
+    name: manage-food-network
