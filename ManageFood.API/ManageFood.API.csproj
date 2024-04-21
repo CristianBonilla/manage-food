@@ -13,4 +13,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ManageFood.Contracts\ManageFood.Contracts.csproj" />
+    <ProjectReference Include="..\ManageFood.Domain.Entities\ManageFood.Domain.Entities.csproj" />
+    <ProjectReference Include="..\ManageFood.Domain\ManageFood.Domain.csproj" />
+    <ProjectReference Include="..\ManageFood.Infrastructure\ManageFood.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

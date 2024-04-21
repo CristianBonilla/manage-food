@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ManageFood.Contracts\ManageFood.Contracts.csproj" />
+    <ProjectReference Include="..\ManageFood.Domain.Entities\ManageFood.Domain.Entities.csproj" />
+    <ProjectReference Include="..\ManageFood.Infrastructure\ManageFood.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -16,6 +16,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.API", "ManageFood.API\ManageFood.API.csproj", "{055447E9-4324-4861-8CA0-3CFEA8EF1894}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.Infrastructure", "ManageFood.Infrastructure\ManageFood.Infrastructure.csproj", "{BFB67504-6B29-4D69-B8F4-4B98AF79B47D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.Domain", "ManageFood.Domain\ManageFood.Domain.csproj", "{12FC9B44-7CA6-4E7E-A0D9-0B614411D504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.Domain.Entities", "ManageFood.Domain.Entities\ManageFood.Domain.Entities.csproj", "{DE05D0BA-5DC8-42C4-933B-19C58E9EE64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.Contracts", "ManageFood.Contracts\ManageFood.Contracts.csproj", "{6DFF83A3-2FBF-4ECA-9167-408D9D954391}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageFood.Tests", "ManageFood.Tests\ManageFood.Tests.csproj", "{1AAAD50D-52D4-47DE-B8C0-E49B8EFC2D2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +36,26 @@ Global
 		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{055447E9-4324-4861-8CA0-3CFEA8EF1894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB67504-6B29-4D69-B8F4-4B98AF79B47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFB67504-6B29-4D69-B8F4-4B98AF79B47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFB67504-6B29-4D69-B8F4-4B98AF79B47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFB67504-6B29-4D69-B8F4-4B98AF79B47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12FC9B44-7CA6-4E7E-A0D9-0B614411D504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FC9B44-7CA6-4E7E-A0D9-0B614411D504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FC9B44-7CA6-4E7E-A0D9-0B614411D504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FC9B44-7CA6-4E7E-A0D9-0B614411D504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE05D0BA-5DC8-42C4-933B-19C58E9EE64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE05D0BA-5DC8-42C4-933B-19C58E9EE64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE05D0BA-5DC8-42C4-933B-19C58E9EE64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE05D0BA-5DC8-42C4-933B-19C58E9EE64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DFF83A3-2FBF-4ECA-9167-408D9D954391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFF83A3-2FBF-4ECA-9167-408D9D954391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFF83A3-2FBF-4ECA-9167-408D9D954391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFF83A3-2FBF-4ECA-9167-408D9D954391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAAD50D-52D4-47DE-B8C0-E49B8EFC2D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAAD50D-52D4-47DE-B8C0-E49B8EFC2D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAAD50D-52D4-47DE-B8C0-E49B8EFC2D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAAD50D-52D4-47DE-B8C0-E49B8EFC2D2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
