@@ -10,6 +10,8 @@ namespace ManageFood.Domain.Entities
     public required string Email { get; set; }
     public required string Firstname { get; set; }
     public required string Lastname { get; set; }
-    public RoleEntity? Role { get; set; }
+    public RoleEntity Role { get; set; } = null!;
+    public DateTimeOffset Created { get; set; }
+    public byte[] Version { get; set; } = null!;
   }
 }

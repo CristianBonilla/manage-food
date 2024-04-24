@@ -6,6 +6,7 @@ namespace ManageFood.Domain.Entities
     public int Order {  get; set; }
     public required string Name {  get; set; }
     public required string DisplayName { get; set; }
+    public ICollection<RolePermissionEntity> RolePermissions { get; set; } = [];
     public DateTimeOffset Created { get; set; }
     public byte[] Version { get; set; } = null!;
   }

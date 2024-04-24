@@ -10,7 +10,7 @@ namespace ManageFood.Domain.Entities
     public decimal Price { get; set; }
     public DateTimeOffset Created { get; set; }
     public byte[] Version { get; set; } = null!;
-    public CatalogueEntity? Catalogue { get; set; }
-    public InventoryEntity? Inventory { get; set; }
+    public CatalogueEntity Catalogue { get; set; } = null!;
+    public InventoryEntity Inventory { get; set; } = null!;
   }
 }
