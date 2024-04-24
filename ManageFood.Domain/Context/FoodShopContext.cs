@@ -1,5 +1,5 @@
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using ManageFood.Domain.EntitiesConfig;
 
 namespace ManageFood.Domain.Context
 {
@@ -7,7 +7,8 @@ namespace ManageFood.Domain.Context
   {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+      modelBuilder.ApplyConfigurationsFromAssembly(typeof(RoleConfig).Assembly);
+      modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfig).Assembly);
     }
   }
 }

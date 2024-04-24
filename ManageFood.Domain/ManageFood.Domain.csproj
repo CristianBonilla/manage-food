@@ -22,9 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntitiesConfig\" />
     <Folder Include="Repositories\" />
-    <Folder Include="SeedWork\" />
+    <Folder Include="SeedWork\Collections\Shop\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
