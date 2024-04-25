@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Repositories\" />
-    <Folder Include="SeedWork\Collections\Shop\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
