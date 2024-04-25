@@ -3,7 +3,7 @@ namespace ManageFood.Domain.Entities
   public class UserEntity
   {
     public Guid UserId { get; set; }
-    public Guid RoleId { get; set; }
+    public required Guid RoleId { get; set; }
     public required string DocumentNumber { get; set; }
     public required string Username { get; set; }
     public required string Password { get; set; }
