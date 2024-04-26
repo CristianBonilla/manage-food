@@ -1,6 +1,4 @@
-using ManageFood.Contracts.Helpers;
-
-namespace ManageFood.Contracts.Structs
+namespace ManageFood.Domain.Helpers
 {
   public class UnitType(int key, string value) : StringEnumeration(key, value)
   {

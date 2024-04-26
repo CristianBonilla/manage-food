@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace ManageFood.Contracts.Helpers
+namespace ManageFood.Domain.Helpers
 {
   public abstract class StringEnumeration : IComparable
   {

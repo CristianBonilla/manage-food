@@ -10,10 +10,11 @@ namespace ManageFood.Domain.SeedWork
     public static IEnumerable<PermissionEntity> Permissions => PermissionCollection.List;
     public static IEnumerable<RolePermissionEntity> RolePermissions => RolePermissionCollection.List;
 
-    class Shop
+    internal class Shop
     {
-      public static IEnumerable<CatalogueEntity> Catalogues => CatalogueCollection.List;
-      public static IEnumerable<ProductEntity> Products => ProductCollection.List;
+      public static CatalogueCollection Catalogues => new();
+      public static ProductCollection Products => new();
+      public static InventoryCollection Inventories => new();
     }
   }
 }
