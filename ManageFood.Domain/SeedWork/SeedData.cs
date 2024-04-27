@@ -6,9 +6,9 @@ namespace ManageFood.Domain.SeedWork
 {
   class SeedData
   {
-    public static IEnumerable<RoleEntity> Roles => RoleCollection.List;
-    public static IEnumerable<PermissionEntity> Permissions => PermissionCollection.List;
-    public static IEnumerable<RolePermissionEntity> RolePermissions => RolePermissionCollection.List;
+    public static RoleCollection Roles => new();
+    public static PermissionCollection Permissions => new();
+    public static RolePermissionCollection RolePermissions => new();
 
     internal class Shop
     {

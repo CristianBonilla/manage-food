@@ -27,7 +27,7 @@ namespace ManageFood.Domain.EntitiesConfig
         .IsRowVersion();
       builder.HasIndex(index => new { index.Name, index.DisplayName })
         .IsUnique();
-      builder.HasData(SeedData.Roles);
+      builder.HasData(SeedData.Roles.GetAll());
     }
   }
 
@@ -55,7 +55,7 @@ namespace ManageFood.Domain.EntitiesConfig
         .IsRowVersion();
       builder.HasIndex(index => new { index.Name, index.DisplayName })
         .IsUnique();
-      builder.HasData(SeedData.Permissions);
+      builder.HasData(SeedData.Permissions.GetAll());
     }
   }
 
@@ -75,7 +75,7 @@ namespace ManageFood.Domain.EntitiesConfig
         .HasDefaultValueSql("GETUTCDATE()");
       builder.Property(property => property.Version)
         .IsRowVersion();
-      builder.HasData(SeedData.RolePermissions);
+      builder.HasData(SeedData.RolePermissions.GetAll());
     }
   }
 }
