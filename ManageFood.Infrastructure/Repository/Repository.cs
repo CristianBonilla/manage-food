@@ -73,7 +73,7 @@ namespace ManageFood.Infrastructure.Repository
 
     public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entitySet.Any(predicate);
 
-    public IEnumerable<TEntity> Get(params Expression<Func<TEntity, bool>>[] includes) => Includes(null, includes);
+    public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, bool>>[] includes) => Includes(null, includes);
 
     public IEnumerable<TEntity> GetByFilter(
       Expression<Func<TEntity, bool>> filter,

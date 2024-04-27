@@ -4,10 +4,10 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
 {
   class CatalogueCollection
   {
-    private int index = 0;
-    private readonly CatalogueEntity[] catalogues = new CatalogueEntity[4];
+    int _index;
+    readonly CatalogueEntity[] _catalogues = new CatalogueEntity[4];
 
-    public int Length => catalogues.Length;
+    public int Length => _catalogues.Length;
 
     public CatalogueCollection()
     {
@@ -40,14 +40,14 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
       ]);
     }
 
-    public CatalogueEntity this[int index] => catalogues.ElementAt(index);
+    public CatalogueEntity this[int index] => _catalogues.ElementAt(index);
 
-    public CatalogueEntity[] GetAll() => catalogues;
+    public CatalogueEntity[] GetAll() => _catalogues;
 
     private void Init(params CatalogueEntity[] catalogues)
     {
       foreach (CatalogueEntity catalogue in catalogues)
-        this.catalogues[index++] = catalogue;
+        this._catalogues[_index++] = catalogue;
     }
   }
 }

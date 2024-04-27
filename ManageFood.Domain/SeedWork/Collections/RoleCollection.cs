@@ -5,10 +5,10 @@ namespace ManageFood.Domain.SeedWork.Collections
 {
   class RoleCollection
   {
-    private int index = 0;
-    private readonly RoleEntity[] roles = new RoleEntity[2];
+    int _index;
+    readonly RoleEntity[] _roles = new RoleEntity[2];
 
-    public int Length => roles.Length;
+    public int Length => _roles.Length;
 
     public RoleCollection()
     {
@@ -30,14 +30,14 @@ namespace ManageFood.Domain.SeedWork.Collections
       ]);
     }
 
-    public Guid this[int index] => roles.ElementAt(index).RoleId;
+    public Guid this[int index] => _roles.ElementAt(index).RoleId;
 
-    public RoleEntity[] GetAll() => [.. roles];
+    public RoleEntity[] GetAll() => [.. _roles];
 
     private void Init(params RoleEntity[] roles)
     {
       foreach (RoleEntity role in roles)
-        this.roles[index++] = role;
+        _roles[_index++] = role;
     }
   }
 }

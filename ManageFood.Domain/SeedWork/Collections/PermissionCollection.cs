@@ -5,10 +5,10 @@ namespace ManageFood.Domain.SeedWork.Collections
 {
   class PermissionCollection
   {
-    private int index = 0;
-    private readonly PermissionEntity[] permissions = new PermissionEntity[4];
+    int _index;
+    readonly PermissionEntity[] _permissions = new PermissionEntity[4];
 
-    public int Length => permissions.Length;
+    public int Length => _permissions.Length;
 
     public PermissionCollection()
     {
@@ -48,14 +48,14 @@ namespace ManageFood.Domain.SeedWork.Collections
       ]);
     }
 
-    public Guid this[int index] => permissions.ElementAt(index).PermissionId;
+    public Guid this[int index] => _permissions.ElementAt(index).PermissionId;
 
-    public PermissionEntity[] GetAll() => permissions;
+    public PermissionEntity[] GetAll() => _permissions;
 
     private void Init(params PermissionEntity[] permissions)
     {
       foreach (PermissionEntity permission in permissions)
-        this.permissions[index++] = permission;
+        _permissions[_index++] = permission;
     }
   }
 }
