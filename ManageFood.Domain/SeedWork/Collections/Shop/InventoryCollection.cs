@@ -11,8 +11,6 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
 
     public int Length => inventories.Length;
 
-    public Guid this[int index] => inventories.ElementAt(index).ProductId;
-
     public InventoryCollection()
     {
       Init([
@@ -148,6 +146,10 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
         }
       ]);
     }
+
+    public Guid this[int index] => inventories.ElementAt(index).ProductId;
+
+    public InventoryEntity[] GetAll() => [.. inventories];
 
     private void Init(params InventoryEntity[] inventories)
     {

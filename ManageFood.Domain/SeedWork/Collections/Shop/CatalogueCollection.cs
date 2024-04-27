@@ -9,10 +9,6 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
 
     public int Length => catalogues.Length;
 
-    public CatalogueEntity this[int index] => catalogues.ElementAt(index);
-
-    public CatalogueEntity[] GetAll() => catalogues;
-
     public CatalogueCollection()
     {
       Init([
@@ -43,6 +39,10 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
         }
       ]);
     }
+
+    public CatalogueEntity this[int index] => catalogues.ElementAt(index);
+
+    public CatalogueEntity[] GetAll() => catalogues;
 
     private void Init(params CatalogueEntity[] catalogues)
     {

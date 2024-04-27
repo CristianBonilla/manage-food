@@ -9,6 +9,7 @@ namespace ManageFood.Domain.Context
     {
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(RoleConfig).Assembly);
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfig).Assembly);
+      modelBuilder.ApplyConfigurationsFromAssembly(typeof(FoodShopConfig).Assembly);
     }
   }
 }

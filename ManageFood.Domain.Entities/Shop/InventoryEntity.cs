@@ -5,8 +5,8 @@ namespace ManageFood.Domain.Entities
   public class InventoryEntity
   {
     public required Guid ProductId { get; set; }
-    public required float Quantity { get; set; }
-    public required float QuantityAvailable { get; set; }
+    public required int Quantity { get; set; }
+    public required int QuantityAvailable { get; set; }
     public required float Unit {  get; set; }
     public required UnitType UnitType { get; set; }
     public required decimal Price { get; set; }

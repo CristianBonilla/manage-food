@@ -4,6 +4,7 @@ namespace ManageFood.Domain.Entities
   {
     public Guid ProductId { get; set; }
     public required Guid CatalogueId { get; set; }
+    public required Guid InventoryId { get; set; }
     public required string Name { get; set; }
     public string? Description { get; set; }
     public DateTimeOffset Created { get; set; }

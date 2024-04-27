@@ -10,10 +10,6 @@ namespace ManageFood.Domain.SeedWork.Collections
 
     public int Length => permissions.Length;
 
-    public Guid this[int index] => permissions.ElementAt(index).PermissionId;
-
-    public PermissionEntity[] GetAll() => permissions;
-
     public PermissionCollection()
     {
       Init([
@@ -51,6 +47,10 @@ namespace ManageFood.Domain.SeedWork.Collections
         }
       ]);
     }
+
+    public Guid this[int index] => permissions.ElementAt(index).PermissionId;
+
+    public PermissionEntity[] GetAll() => permissions;
 
     private void Init(params PermissionEntity[] permissions)
     {

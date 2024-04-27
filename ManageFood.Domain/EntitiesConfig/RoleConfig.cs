@@ -5,7 +5,7 @@ using ManageFood.Domain.SeedWork;
 
 namespace ManageFood.Domain.EntitiesConfig
 {
-  class RoleConfig : IEntityTypeConfiguration<RoleEntity>
+  partial class RoleConfig : IEntityTypeConfiguration<RoleEntity>
   {
     public void Configure(EntityTypeBuilder<RoleEntity> builder)
     {
@@ -31,7 +31,7 @@ namespace ManageFood.Domain.EntitiesConfig
     }
   }
 
-  class PermissionConfig : IEntityTypeConfiguration<PermissionEntity>
+  partial class RoleConfig : IEntityTypeConfiguration<PermissionEntity>
   {
     public void Configure(EntityTypeBuilder<PermissionEntity> builder)
     {
@@ -59,22 +59,22 @@ namespace ManageFood.Domain.EntitiesConfig
     }
   }
 
-  class RolePermissionConfig : IEntityTypeConfiguration<RolePermissionEntity>
+  partial class RoleConfig : IEntityTypeConfiguration<RolePermissionEntity>
   {
     public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
     {
       builder.ToTable("RolePermission", "dbo")
         .HasKey(key => new { key.RoleId, key.PermissionId });
+      builder.Property(property => property.Created)
+        .HasDefaultValueSql("GETUTCDATE()");
+      builder.Property(property => property.Version)
+        .IsRowVersion();
       builder.HasOne(one => one.Role)
         .WithMany(many => many.RolePermissions)
         .HasForeignKey(key => key.RoleId);
       builder.HasOne(one => one.Permission)
         .WithMany(many => many.RolePermissions)
         .HasForeignKey(key => key.PermissionId);
-      builder.Property(property => property.Created)
-        .HasDefaultValueSql("GETUTCDATE()");
-      builder.Property(property => property.Version)
-        .IsRowVersion();
       builder.HasData(SeedData.RolePermissions.GetAll());
     }
   }
