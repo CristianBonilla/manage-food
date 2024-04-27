@@ -1,5 +1,5 @@
-using ManageFood.Contracts.Structs;
 using ManageFood.Domain.Entities;
+using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Domain.SeedWork.Collections
 {

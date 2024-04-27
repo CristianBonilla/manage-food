@@ -1,4 +1,3 @@
-using ManageFood.Domain.Entities;
 using ManageFood.Domain.SeedWork.Collections;
 using ManageFood.Domain.SeedWork.Collections.Shop;
 

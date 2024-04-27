@@ -1,4 +1,4 @@
-namespace ManageFood.Contracts.Structs
+namespace ManageFood.Domain.Helpers
 {
   public readonly struct Permissions
   {

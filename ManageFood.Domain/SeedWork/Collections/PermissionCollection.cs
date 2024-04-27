@@ -1,12 +1,12 @@
-using ManageFood.Contracts.Structs;
 using ManageFood.Domain.Entities;
+using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Domain.SeedWork.Collections
 {
   class PermissionCollection
   {
     private int index = 0;
-    private readonly PermissionEntity[] permissions = new PermissionEntity[3];
+    private readonly PermissionEntity[] permissions = new PermissionEntity[4];
 
     public int Length => permissions.Length;
 
@@ -35,8 +35,16 @@ namespace ManageFood.Domain.SeedWork.Collections
         },
         new PermissionEntity
         {
-          PermissionId = Permissions.AllowCreateOrder.Id,
+          PermissionId = Permissions.AllowListOrderByUser.Id,
           Order = 3,
+          Name = Permissions.AllowListOrderByUser.Name,
+          DisplayName = "List Order By User",
+          Created = new DateTimeOffset(2024, 3, 2, 8, 49, 33, TimeSpan.FromHours(3))
+        },
+        new PermissionEntity
+        {
+          PermissionId = Permissions.AllowCreateOrder.Id,
+          Order = 4,
           Name = Permissions.AllowCreateOrder.Name,
           DisplayName = "Create Order",
           Created = new DateTimeOffset(2024, 3, 2, 20, 1, 0, TimeSpan.FromHours(3))

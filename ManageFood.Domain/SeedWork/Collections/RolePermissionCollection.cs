@@ -1,4 +1,3 @@
-using ManageFood.Contracts.Structs;
 using ManageFood.Domain.Entities;
 
 namespace ManageFood.Domain.SeedWork.Collections
@@ -6,7 +5,9 @@ namespace ManageFood.Domain.SeedWork.Collections
   class RolePermissionCollection
   {
     private int index = 0;
-    private readonly RolePermissionEntity[] rolePermissions = new RolePermissionEntity[5];
+    private static readonly RoleCollection roles = SeedData.Roles;
+    private static readonly PermissionCollection permissions = SeedData.Permissions;
+    private readonly RolePermissionEntity[] rolePermissions = new RolePermissionEntity[6];
 
     public int Length => rolePermissions.Length;
 
@@ -15,33 +16,39 @@ namespace ManageFood.Domain.SeedWork.Collections
       Init([
         new RolePermissionEntity
         {
-          RoleId = Roles.AdminUser.Id,
-          PermissionId = Permissions.AllowManageFood.Id,
+          RoleId = roles[0],
+          PermissionId = permissions[0],
           Created = new DateTimeOffset(2024, 3, 1, 17, 33, 0, TimeSpan.FromHours(3))
         },
         new RolePermissionEntity
         {
-          RoleId = Roles.AdminUser.Id,
-          PermissionId = Permissions.AllowListOrders.Id,
+          RoleId = roles[0],
+          PermissionId = permissions[1],
           Created = new DateTimeOffset(2024, 3, 9, 22, 12, 0, TimeSpan.FromHours(3))
         },
         new RolePermissionEntity
         {
-          RoleId = Roles.AdminUser.Id,
-          PermissionId = Permissions.AllowCreateOrder.Id,
+          RoleId = roles[0],
+          PermissionId = permissions[2],
           Created = new DateTimeOffset(2024, 3, 24, 11, 43, 0, TimeSpan.FromHours(3))
         },
         new RolePermissionEntity
         {
-          RoleId = Roles.CommonUser.Id,
-          PermissionId = Permissions.AllowListOrderByUser.Id,
-          Created = new DateTimeOffset(2024, 3, 24, 17, 8, 0, TimeSpan.FromHours(3)),
+          RoleId = roles[0],
+          PermissionId = permissions[3],
+          Created = new DateTimeOffset(2024, 3, 25, 4, 28, 0, TimeSpan.FromHours(3)),
         },
         new RolePermissionEntity
         {
-          RoleId = Roles.CommonUser.Id,
-          PermissionId = Permissions.AllowCreateOrder.Id,
-          Created = new DateTimeOffset(2024, 3, 24, 19, 17, 0, TimeSpan.FromHours(3))
+          RoleId = roles[1],
+          PermissionId = permissions[2],
+          Created = new DateTimeOffset(2024, 3, 25, 30, 1, 0, TimeSpan.FromHours(3))
+        },
+        new RolePermissionEntity
+        {
+          RoleId = roles[1],
+          PermissionId = permissions[3],
+          Created = new DateTimeOffset(2024, 3, 28, 1, 22, 0, TimeSpan.FromHours(3))
         }
       ]);
     }

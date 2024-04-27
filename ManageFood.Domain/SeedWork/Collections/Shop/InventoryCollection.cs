@@ -6,6 +6,7 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
   class InventoryCollection
   {
     private int index = 0;
+    private static readonly ProductCollection products = SeedData.Shop.Products;
     private readonly InventoryEntity[] inventories = new InventoryEntity[products.Length];
 
     public int Length => inventories.Length;
@@ -147,8 +148,6 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
         }
       ]);
     }
-
-    private static readonly ProductCollection products = SeedData.Shop.Products;
 
     private void Init(params InventoryEntity[] inventories)
     {

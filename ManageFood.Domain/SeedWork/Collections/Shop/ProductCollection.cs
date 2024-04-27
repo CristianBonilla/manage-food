@@ -5,6 +5,7 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
   class ProductCollection
   {
     private int index = 0;
+    private static readonly CatalogueCollection catalogues = SeedData.Shop.Catalogues;
     private readonly ProductEntity[] products = new ProductEntity[13];
 
     public int Length => products.Length;
@@ -113,8 +114,6 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
         }
       ]);
     }
-
-    private static readonly CatalogueCollection catalogues = SeedData.Shop.Catalogues;
 
     private void Init(params ProductEntity[] products)
     {
