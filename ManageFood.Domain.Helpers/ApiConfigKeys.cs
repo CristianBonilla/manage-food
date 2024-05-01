@@ -1,6 +1,6 @@
 namespace ManageFood.Domain.Helpers
 {
-  public struct ApiConfigKeys
+  public record struct ApiConfigKeys
   {
     public const string AllowOrigins = nameof(AllowOrigins);
     public const string Bearer = nameof(Bearer);

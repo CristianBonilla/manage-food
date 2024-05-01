@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
-using ManageFood.Domain.SeedWork;
 
 namespace ManageFood.Domain.EntitiesConfig
 {
-  partial class FoodShopConfig : IEntityTypeConfiguration<CatalogueEntity>
+  class CatalogueConfig(ISeedData? seedData) : IEntityTypeConfiguration<CatalogueEntity>
   {
     public void Configure(EntityTypeBuilder<CatalogueEntity> builder)
     {
@@ -30,11 +30,12 @@ namespace ManageFood.Domain.EntitiesConfig
         .OnDelete(DeleteBehavior.Cascade);
       builder.HasIndex(index => new { index.Name })
         .IsUnique();
-      builder.HasData(SeedData.Shop.Catalogues.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.FoodShop.Catalogues.GetAll());
     }
   }
 
-  partial class FoodShopConfig : IEntityTypeConfiguration<ProductEntity>
+  class ProductConfig(ISeedData? seedData) : IEntityTypeConfiguration<ProductEntity>
   {
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {
@@ -60,11 +61,12 @@ namespace ManageFood.Domain.EntitiesConfig
         .OnDelete(DeleteBehavior.Cascade);
       builder.HasIndex(index => new { index.Name })
         .IsUnique();
-      builder.HasData(SeedData.Shop.Products.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.FoodShop.Products.GetAll());
     }
   }
 
-  partial class FoodShopConfig : IEntityTypeConfiguration<InventoryEntity>
+  class InventoryConfig(ISeedData? seedData) : IEntityTypeConfiguration<InventoryEntity>
   {
     public void Configure(EntityTypeBuilder<InventoryEntity> builder)
     {
@@ -88,7 +90,8 @@ namespace ManageFood.Domain.EntitiesConfig
         .WithOne(one => one.Inventory)
         .HasForeignKey<ProductEntity>(key => key.InventoryId)
         .OnDelete(DeleteBehavior.Cascade);
-      builder.HasData(SeedData.Shop.Inventories.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.FoodShop.Inventories.GetAll());
     }
   }
 }

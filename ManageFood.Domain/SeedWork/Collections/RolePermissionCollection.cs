@@ -1,18 +1,21 @@
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 
 namespace ManageFood.Domain.SeedWork.Collections
 {
-  class RolePermissionCollection
+  class RolePermissionCollection : SeedData, ISeedDataCollection<(Guid RoleId, Guid PermissionId), RolePermissionEntity>
   {
     int _index;
-    static readonly RoleCollection _roles = SeedData.Roles;
-    static readonly PermissionCollection _permissions = SeedData.Permissions;
+    readonly ISeedDataCollection<Guid, RoleEntity> _roles;
+    readonly ISeedDataCollection<Guid, PermissionEntity> _permissions;
     readonly RolePermissionEntity[] _rolePermissions = new RolePermissionEntity[6];
 
     public int Length => _rolePermissions.Length;
 
     public RolePermissionCollection()
     {
+      _roles = Auth.Roles;
+      _permissions = Auth.Permissions;
       Init([
         new RolePermissionEntity
         {
@@ -55,7 +58,7 @@ namespace ManageFood.Domain.SeedWork.Collections
 
     public (Guid RoleId, Guid PermissionId) this[int index] => Id(_rolePermissions.ElementAt(index));
 
-    public RolePermissionEntity[] GetAll() => [.. _rolePermissions];
+    public IEnumerable<RolePermissionEntity> GetAll() => [.. _rolePermissions];
 
     private void Init(params RolePermissionEntity[] rolePermissions)
     {

@@ -1,9 +1,10 @@
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Domain.SeedWork.Collections
 {
-  class RoleCollection
+  class RoleCollection : SeedData, ISeedDataCollection<Guid, RoleEntity>
   {
     int _index;
     readonly RoleEntity[] _roles = new RoleEntity[2];
@@ -32,7 +33,7 @@ namespace ManageFood.Domain.SeedWork.Collections
 
     public Guid this[int index] => _roles.ElementAt(index).RoleId;
 
-    public RoleEntity[] GetAll() => [.. _roles];
+    public IEnumerable<RoleEntity> GetAll() => [.. _roles];
 
     private void Init(params RoleEntity[] roles)
     {

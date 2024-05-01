@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
-using ManageFood.Domain.SeedWork;
 
 namespace ManageFood.Domain.EntitiesConfig
 {
-  partial class RoleConfig : IEntityTypeConfiguration<RoleEntity>
+  class RoleConfig(ISeedData? seedData) : IEntityTypeConfiguration<RoleEntity>
   {
     public void Configure(EntityTypeBuilder<RoleEntity> builder)
     {
@@ -27,11 +27,12 @@ namespace ManageFood.Domain.EntitiesConfig
         .IsRowVersion();
       builder.HasIndex(index => new { index.Name, index.DisplayName })
         .IsUnique();
-      builder.HasData(SeedData.Roles.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.Auth.Roles.GetAll());
     }
   }
 
-  partial class RoleConfig : IEntityTypeConfiguration<PermissionEntity>
+  class PermissionConfig(ISeedData? seedData) : IEntityTypeConfiguration<PermissionEntity>
   {
     public void Configure(EntityTypeBuilder<PermissionEntity> builder)
     {
@@ -55,11 +56,12 @@ namespace ManageFood.Domain.EntitiesConfig
         .IsRowVersion();
       builder.HasIndex(index => new { index.Name, index.DisplayName })
         .IsUnique();
-      builder.HasData(SeedData.Permissions.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.Auth.Permissions.GetAll());
     }
   }
 
-  partial class RoleConfig : IEntityTypeConfiguration<RolePermissionEntity>
+  class RolePermissionConfig(ISeedData? seedData) : IEntityTypeConfiguration<RolePermissionEntity>
   {
     public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
     {
@@ -75,7 +77,50 @@ namespace ManageFood.Domain.EntitiesConfig
       builder.HasOne(one => one.Permission)
         .WithMany(many => many.RolePermissions)
         .HasForeignKey(key => key.PermissionId);
-      builder.HasData(SeedData.RolePermissions.GetAll());
+      if (seedData is not null)
+        builder.HasData(seedData.Auth.RolePermissions.GetAll());
+    }
+  }
+
+  class UserConfig : IEntityTypeConfiguration<UserEntity>
+  {
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    {
+      builder.ToTable("User", "dbo")
+        .HasKey(key => key.UserId);
+      builder.Property(property => property.UserId)
+        .HasDefaultValueSql("NEWID()");
+      builder.Property(property => property.DocumentNumber)
+        .IsRequired();
+      builder.Property(property => property.Username)
+        .HasMaxLength(100)
+        .IsUnicode(false)
+        .IsRequired();
+      builder.Property(property => property.Password)
+        .HasColumnType("varchar(max)")
+        .IsRequired();
+      builder.Property(property => property.Email)
+        .HasMaxLength(100)
+        .IsUnicode(false)
+        .IsRequired();
+      builder.Property(property => property.Firstname)
+        .HasMaxLength(50)
+        .IsUnicode(false)
+        .IsRequired();
+      builder.Property(property => property.Lastname)
+        .HasMaxLength(50)
+        .IsUnicode(false)
+        .IsRequired();
+      builder.Property(property => property.Created)
+        .HasDefaultValueSql("GETUTCDATE()");
+      builder.Property(property => property.Version)
+        .IsRowVersion();
+      builder.HasOne(property => property.Role)
+        .WithMany(many => many.Users)
+        .HasForeignKey(key => key.RoleId)
+        .OnDelete(DeleteBehavior.Cascade);
+      builder.HasIndex(index => new { index.DocumentNumber, index.Username, index.Email })
+        .IsUnique();
     }
   }
 }

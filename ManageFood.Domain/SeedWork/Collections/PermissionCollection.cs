@@ -1,9 +1,10 @@
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Domain.SeedWork.Collections
 {
-  class PermissionCollection
+  class PermissionCollection : SeedData, ISeedDataCollection<Guid, PermissionEntity>
   {
     int _index;
     readonly PermissionEntity[] _permissions = new PermissionEntity[4];
@@ -50,7 +51,7 @@ namespace ManageFood.Domain.SeedWork.Collections
 
     public Guid this[int index] => _permissions.ElementAt(index).PermissionId;
 
-    public PermissionEntity[] GetAll() => _permissions;
+    public IEnumerable<PermissionEntity> GetAll() => [.. _permissions];
 
     private void Init(params PermissionEntity[] permissions)
     {

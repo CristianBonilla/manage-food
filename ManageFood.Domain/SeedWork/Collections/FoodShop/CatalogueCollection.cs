@@ -1,8 +1,9 @@
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 
-namespace ManageFood.Domain.SeedWork.Collections.Shop
+namespace ManageFood.Domain.SeedWork.Collections.FoodShop
 {
-  class CatalogueCollection
+  class CatalogueCollection : SeedData, ISeedDataCollection<Guid, CatalogueEntity>
   {
     int _index;
     readonly CatalogueEntity[] _catalogues = new CatalogueEntity[4];
@@ -40,9 +41,9 @@ namespace ManageFood.Domain.SeedWork.Collections.Shop
       ]);
     }
 
-    public CatalogueEntity this[int index] => _catalogues.ElementAt(index);
+    public Guid this[int index] => _catalogues.ElementAt(index).CatalogueId;
 
-    public CatalogueEntity[] GetAll() => _catalogues;
+    public IEnumerable<CatalogueEntity> GetAll() => [.. _catalogues];
 
     private void Init(params CatalogueEntity[] catalogues)
     {

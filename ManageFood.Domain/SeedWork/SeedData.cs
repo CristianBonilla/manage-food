@@ -1,19 +1,23 @@
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.SeedWork.Collections;
-using ManageFood.Domain.SeedWork.Collections.Shop;
+using ManageFood.Domain.SeedWork.Collections.FoodShop;
 
 namespace ManageFood.Domain.SeedWork
 {
-  class SeedData
+  public class SeedData : ISeedData
   {
-    public static RoleCollection Roles => new();
-    public static PermissionCollection Permissions => new();
-    public static RolePermissionCollection RolePermissions => new();
-
-    internal class Shop
+    public SeedAuthData Auth => new()
     {
-      public static CatalogueCollection Catalogues => new();
-      public static ProductCollection Products => new();
-      public static InventoryCollection Inventories => new();
-    }
+      Roles = new RoleCollection(),
+      Permissions = new PermissionCollection(),
+      RolePermissions = new RolePermissionCollection()
+    };
+
+    public SeedFoodShopData FoodShop => new()
+    {
+      Catalogues = new CatalogueCollection(),
+      Products = new ProductCollection(),
+      Inventories = new InventoryCollection()
+    };
   }
 }

@@ -1,15 +1,25 @@
 using Microsoft.EntityFrameworkCore;
+using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.EntitiesConfig;
+using ManageFood.Domain.Extensions;
 
 namespace ManageFood.Domain.Context
 {
-  public class FoodShopContext(DbContextOptions<FoodShopContext> contextOptions) : DbContext(contextOptions)
+  public class FoodShopContext(DbContextOptions<FoodShopContext> options) : DbContext(options)
   {
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    readonly ISeedData? _seedData = options.GetSeedData();
+
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-      modelBuilder.ApplyConfigurationsFromAssembly(typeof(RoleConfig).Assembly);
-      modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfig).Assembly);
-      modelBuilder.ApplyConfigurationsFromAssembly(typeof(FoodShopConfig).Assembly);
+      builder.ApplyEntityTypeConfig(_seedData,
+        typeof(RoleConfig),
+        typeof(PermissionConfig),
+        typeof(RolePermissionConfig),
+        typeof(UserConfig));
+      builder.ApplyEntityTypeConfig(_seedData,
+        typeof(CatalogueConfig),
+        typeof(ProductConfig),
+        typeof(InventoryConfig));
     }
   }
 }
