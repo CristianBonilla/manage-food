@@ -5,18 +5,16 @@ using ManageFood.Domain.Extensions;
 
 namespace ManageFood.Domain.Context
 {
-  public class FoodShopContext(DbContextOptions<FoodShopContext> options) : DbContext(options)
+  public class FoodShopContext(DbContextOptions<FoodShopContext> options, ISeedData seedData) : DbContext(options)
   {
-    readonly ISeedData? _seedData = options.GetSeedData();
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
-      builder.ApplyEntityTypeConfig(_seedData,
+      builder.ApplyEntityTypeConfig(seedData,
         typeof(RoleConfig),
         typeof(PermissionConfig),
         typeof(RolePermissionConfig),
         typeof(UserConfig));
-      builder.ApplyEntityTypeConfig(_seedData,
+      builder.ApplyEntityTypeConfig(seedData,
         typeof(CatalogueConfig),
         typeof(ProductConfig),
         typeof(InventoryConfig));

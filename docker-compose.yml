@@ -14,7 +14,7 @@ services:
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: 'sql-server'
+    container_name: 'manage-food-DB'
     hostname: 'sql-server'
     environment:
       ACCEPT_EULA: 'Y'

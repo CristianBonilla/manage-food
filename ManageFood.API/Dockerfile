@@ -12,6 +12,7 @@ WORKDIR /src
 COPY ["ManageFood.API/ManageFood.API.csproj", "ManageFood.API/"]
 COPY ["ManageFood.Contracts/ManageFood.Contracts.csproj", "ManageFood.Contracts/"]
 COPY ["ManageFood.Domain.Entities/ManageFood.Domain.Entities.csproj", "ManageFood.Domain.Entities/"]
+COPY ["ManageFood.Domain.Helpers/ManageFood.Domain.Helpers.csproj", "ManageFood.Domain.Helpers/"]
 COPY ["ManageFood.Domain/ManageFood.Domain.csproj", "ManageFood.Domain/"]
 COPY ["ManageFood.Infrastructure/ManageFood.Infrastructure.csproj", "ManageFood.Infrastructure/"]
 RUN dotnet restore "./ManageFood.API/ManageFood.API.csproj"

@@ -25,7 +25,7 @@ namespace ManageFood.API
     {
       using IServiceScope serviceScope = host.Services.CreateScope();
       TContext context = serviceScope.ServiceProvider.GetRequiredService<TContext>();
-      await context.Database.MigrateAsync();
+      await context.Database.OpenConnectionAsync();
     }
   }
 }
