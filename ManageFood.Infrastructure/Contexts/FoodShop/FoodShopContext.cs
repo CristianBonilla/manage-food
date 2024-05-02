@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using ManageFood.Contracts.DTO.SeedData;
-using ManageFood.Domain.EntitiesConfig;
-using ManageFood.Domain.Extensions;
+using ManageFood.Infrastructure.Extensions;
+using ManageFood.Infrastructure.Contexts.FoodShop.Config;
 
-namespace ManageFood.Domain.Context
+namespace ManageFood.Infrastructure.Contexts.FoodShop
 {
   public class FoodShopContext(DbContextOptions<FoodShopContext> options, ISeedData seedData) : DbContext(options)
   {

@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using ManageFood.Contracts.DTO.SeedData;
 
-namespace ManageFood.Domain.Extensions
+namespace ManageFood.Infrastructure.Extensions
 {
   static class EntityTypeConfigExtensions
   {

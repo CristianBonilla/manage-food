@@ -1,4 +1,6 @@
+using Autofac;
 using ManageFood.API.Extensions;
+using ManageFood.API.Modules;
 using ManageFood.API.Options;
 using ManageFood.Domain.Helpers;
 
@@ -11,6 +13,12 @@ namespace ManageFood.API
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) => services.InstallServicesFromAssembly(_configuration, _env);
+
+    // Register your own things directly with Autofac here.
+    public static void ConfigureContainer(ContainerBuilder builder)
+    {
+      builder.RegisterModule<DomainModule>();
+    }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

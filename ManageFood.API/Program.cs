@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Autofac.Extensions.DependencyInjection;
-using ManageFood.Domain.Context;
+using ManageFood.Infrastructure.Contexts.FoodShop;
 
 namespace ManageFood.API
 {
@@ -23,9 +23,9 @@ namespace ManageFood.API
 
     private static async Task DbMigrationStart<TContext>(IHost host) where TContext : DbContext
     {
-      using IServiceScope serviceScope = host.Services.CreateScope();
-      TContext context = serviceScope.ServiceProvider.GetRequiredService<TContext>();
-      await context.Database.OpenConnectionAsync();
+      using IServiceScope scope = host.Services.CreateScope();
+      TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
+      await context.Database.MigrateAsync();
     }
   }
 }

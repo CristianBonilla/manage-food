@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 
-namespace ManageFood.Domain.EntitiesConfig
+namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
 {
   class RoleConfig(ISeedData? seedData) : IEntityTypeConfiguration<RoleEntity>
   {

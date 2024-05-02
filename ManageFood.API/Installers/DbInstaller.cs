@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ManageFood.Domain.Context;
 using ManageFood.Domain.Helpers;
-using ManageFood.Domain.Extensions;
-using ManageFood.Domain.SeedWork;
+using ManageFood.Infrastructure.Contexts.FoodShop;
 
 namespace ManageFood.API.Installers
 {
@@ -13,7 +11,6 @@ namespace ManageFood.API.Installers
       string? connectionString = configuration.GetConnectionString(ApiConfigKeys.ManageFoodConnection) ?? throw new InvalidOperationException($"Connection string '{ApiConfigKeys.ManageFoodConnection}' not established");
       services.AddDbContextPool<FoodShopContext>(options =>
       {
-        options.Options.SetSeedData(new SeedData());
         options.UseSqlServer(connectionString);
       });
     }
