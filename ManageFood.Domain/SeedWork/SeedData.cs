@@ -1,6 +1,5 @@
 using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.SeedWork.Collections;
-using ManageFood.Domain.SeedWork.Collections.FoodShop;
 
 namespace ManageFood.Domain.SeedWork
 {
@@ -8,16 +7,16 @@ namespace ManageFood.Domain.SeedWork
   {
     public SeedAuthData Auth => new()
     {
-      Roles = new RoleCollection(),
-      Permissions = new PermissionCollection(),
-      RolePermissions = new RolePermissionCollection()
+      Roles = AuthCollection.Roles,
+      Permissions = AuthCollection.Permissions,
+      RolePermissions = AuthCollection.RolePermissions
     };
 
     public SeedFoodShopData FoodShop => new()
     {
-      Catalogues = new CatalogueCollection(),
-      Products = new ProductCollection(),
-      Inventories = new InventoryCollection()
+      Catalogues = FoodShopCollection.Catalogues,
+      Products = FoodShopCollection.Products,
+      Inventories = FoodShopCollection.Inventories
     };
   }
 }

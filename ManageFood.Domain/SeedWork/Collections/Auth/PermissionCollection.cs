@@ -2,9 +2,9 @@ using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 using ManageFood.Domain.Helpers;
 
-namespace ManageFood.Domain.SeedWork.Collections
+namespace ManageFood.Domain.SeedWork.Collections.Auth
 {
-  class PermissionCollection : SeedData, ISeedDataCollection<Guid, PermissionEntity>
+  class PermissionCollection : ISeedDataCollection<Guid, PermissionEntity>
   {
     int _index;
     readonly PermissionEntity[] _permissions = new PermissionEntity[4];

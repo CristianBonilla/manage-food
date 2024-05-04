@@ -1,4 +1,4 @@
-using ManageFood.Domain.Entities;
+using ManageFood.Domain.Entities.FoodShop;
 
 namespace ManageFood.Contracts.DTO.SeedData
 {

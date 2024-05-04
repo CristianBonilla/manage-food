@@ -1,21 +1,19 @@
 using ManageFood.Contracts.DTO.SeedData;
-using ManageFood.Domain.Entities;
+using ManageFood.Domain.Entities.FoodShop;
 using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Domain.SeedWork.Collections.FoodShop
 {
-  class InventoryCollection : SeedData, ISeedDataCollection<Guid, InventoryEntity>
+  class InventoryCollection : ISeedDataCollection<Guid, InventoryEntity>
   {
     int _index;
-    readonly ISeedDataCollection<ProductEntity, ProductEntity> _products;
-    readonly InventoryEntity[] _inventories;
+    static readonly ProductCollection _products = FoodShopCollection.Products;
+    readonly InventoryEntity[] _inventories = new InventoryEntity[_products.Length];
 
     public int Length => _inventories.Length;
 
     public InventoryCollection()
     {
-      _products = FoodShop.Products;
-      _inventories = new InventoryEntity[_products.Length];
       Init([
         new InventoryEntity
         {

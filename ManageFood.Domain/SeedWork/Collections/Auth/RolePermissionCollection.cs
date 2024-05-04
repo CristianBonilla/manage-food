@@ -1,21 +1,19 @@
 using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 
-namespace ManageFood.Domain.SeedWork.Collections
+namespace ManageFood.Domain.SeedWork.Collections.Auth
 {
-  class RolePermissionCollection : SeedData, ISeedDataCollection<(Guid RoleId, Guid PermissionId), RolePermissionEntity>
+  class RolePermissionCollection : ISeedDataCollection<(Guid RoleId, Guid PermissionId), RolePermissionEntity>
   {
     int _index;
-    readonly ISeedDataCollection<Guid, RoleEntity> _roles;
-    readonly ISeedDataCollection<Guid, PermissionEntity> _permissions;
+    static readonly RoleCollection _roles = AuthCollection.Roles;
+    static readonly PermissionCollection _permissions = AuthCollection.Permissions;
     readonly RolePermissionEntity[] _rolePermissions = new RolePermissionEntity[6];
 
     public int Length => _rolePermissions.Length;
 
     public RolePermissionCollection()
     {
-      _roles = Auth.Roles;
-      _permissions = Auth.Permissions;
       Init([
         new RolePermissionEntity
         {
@@ -45,7 +43,7 @@ namespace ManageFood.Domain.SeedWork.Collections
         {
           RoleId = _roles[1],
           PermissionId = _permissions[2],
-          Created = new DateTimeOffset(2024, 3, 25, 30, 1, 0, TimeSpan.FromHours(3))
+          Created = new DateTimeOffset(2024, 3, 25, 0, 1, 0, TimeSpan.FromHours(3))
         },
         new RolePermissionEntity
         {

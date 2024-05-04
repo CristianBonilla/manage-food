@@ -1,9 +1,9 @@
 using ManageFood.Contracts.DTO.SeedData;
-using ManageFood.Domain.Entities;
+using ManageFood.Domain.Entities.FoodShop;
 
 namespace ManageFood.Domain.SeedWork.Collections.FoodShop
 {
-  class CatalogueCollection : SeedData, ISeedDataCollection<Guid, CatalogueEntity>
+  class CatalogueCollection : ISeedDataCollection<Guid, CatalogueEntity>
   {
     int _index;
     readonly CatalogueEntity[] _catalogues = new CatalogueEntity[4];
@@ -23,7 +23,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
         {
           CatalogueId = new("{16d135b1-e117-47ad-a4ac-c15d40f133fd}"),
           Name = "Frutas",
-          Created = new DateTimeOffset(2024, 2, 14, 50, 11, 0, TimeSpan.FromHours(3))
+          Created = new DateTimeOffset(2024, 2, 14, 10, 11, 0, TimeSpan.FromHours(3))
         },
         new CatalogueEntity
         {
@@ -36,7 +36,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
         {
           CatalogueId = new("{a35a2e5a-63a7-48a6-ab62-1ab5bf012c65}"),
           Name = "Bebidas",
-          Created = new DateTimeOffset(2024, 2, 19, 41, 0, 0, TimeSpan.FromHours(3))
+          Created = new DateTimeOffset(2024, 2, 19, 18, 0, 0, TimeSpan.FromHours(3))
         }
       ]);
     }

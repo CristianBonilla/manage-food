@@ -2,9 +2,9 @@ using ManageFood.Contracts.DTO.SeedData;
 using ManageFood.Domain.Entities;
 using ManageFood.Domain.Helpers;
 
-namespace ManageFood.Domain.SeedWork.Collections
+namespace ManageFood.Domain.SeedWork.Collections.Auth
 {
-  class RoleCollection : SeedData, ISeedDataCollection<Guid, RoleEntity>
+  class RoleCollection : ISeedDataCollection<Guid, RoleEntity>
   {
     int _index;
     readonly RoleEntity[] _roles = new RoleEntity[2];

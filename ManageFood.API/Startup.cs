@@ -3,6 +3,9 @@ using ManageFood.API.Extensions;
 using ManageFood.API.Modules;
 using ManageFood.API.Options;
 using ManageFood.Domain.Helpers;
+using ManageFood.Domain.SeedWork;
+using ManageFood.Infrastructure.Contexts.FoodShop;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManageFood.API
 {

@@ -5,7 +5,7 @@ using ManageFood.Domain.Entities;
 
 namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
 {
-  class RoleConfig(ISeedData? seedData) : IEntityTypeConfiguration<RoleEntity>
+  class RoleConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<RoleEntity>
   {
     public void Configure(EntityTypeBuilder<RoleEntity> builder)
     {
@@ -32,7 +32,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
     }
   }
 
-  class PermissionConfig(ISeedData? seedData) : IEntityTypeConfiguration<PermissionEntity>
+  class PermissionConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<PermissionEntity>
   {
     public void Configure(EntityTypeBuilder<PermissionEntity> builder)
     {
@@ -61,7 +61,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
     }
   }
 
-  class RolePermissionConfig(ISeedData? seedData) : IEntityTypeConfiguration<RolePermissionEntity>
+  class RolePermissionConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<RolePermissionEntity>
   {
     public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
     {

@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ManageFood.Contracts.DTO.SeedData;
-using ManageFood.Domain.Entities;
+using ManageFood.Domain.Entities.FoodShop;
+using ManageFood.Domain.Helpers;
 
 namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
 {
-  class CatalogueConfig(ISeedData? seedData) : IEntityTypeConfiguration<CatalogueEntity>
+  class CatalogueConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<CatalogueEntity>
   {
     public void Configure(EntityTypeBuilder<CatalogueEntity> builder)
     {
@@ -35,7 +36,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
     }
   }
 
-  class ProductConfig(ISeedData? seedData) : IEntityTypeConfiguration<ProductEntity>
+  class ProductConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<ProductEntity>
   {
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {
@@ -55,10 +56,6 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
       builder.HasOne(one => one.Catalogue)
         .WithMany(many => many.Products)
         .HasForeignKey(key => key.ProductId);
-      builder.HasOne(one => one.Inventory)
-        .WithOne(one => one.Product)
-        .HasForeignKey<InventoryEntity>(key => key.ProductId)
-        .OnDelete(DeleteBehavior.Cascade);
       builder.HasIndex(index => new { index.Name })
         .IsUnique();
       if (seedData is not null)
@@ -66,7 +63,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
     }
   }
 
-  class InventoryConfig(ISeedData? seedData) : IEntityTypeConfiguration<InventoryEntity>
+  class InventoryConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<InventoryEntity>
   {
     public void Configure(EntityTypeBuilder<InventoryEntity> builder)
     {
@@ -80,15 +77,20 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .HasPrecision(5, 2)
         .IsRequired();
       builder.Property(property => property.UnitType)
+        .HasConversion(unitType => unitType.Value, value => StringEnumeration.FromValue<UnitType>(value) ?? UnitType.Gram)
         .HasMaxLength(3)
         .IsUnicode(false)
         .IsRequired();
       builder.Property(property => property.Price)
         .HasPrecision(7, 2)
         .IsRequired();
+      builder.Property(property => property.Created)
+        .HasDefaultValueSql("GETUTCDATE()");
+      builder.Property(property => property.Version)
+        .IsRowVersion();
       builder.HasOne(one => one.Product)
-        .WithOne(one => one.Inventory)
-        .HasForeignKey<ProductEntity>(key => key.InventoryId)
+        .WithOne()
+        .HasForeignKey<ProductEntity>(key => key.ProductId)
         .OnDelete(DeleteBehavior.Cascade);
       if (seedData is not null)
         builder.HasData(seedData.FoodShop.Inventories.GetAll());

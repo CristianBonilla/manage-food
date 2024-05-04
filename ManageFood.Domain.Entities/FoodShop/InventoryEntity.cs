@@ -1,6 +1,6 @@
 using ManageFood.Domain.Helpers;
 
-namespace ManageFood.Domain.Entities
+namespace ManageFood.Domain.Entities.FoodShop
 {
   public class InventoryEntity
   {
@@ -10,8 +10,8 @@ namespace ManageFood.Domain.Entities
     public required float Unit {  get; set; }
     public required UnitType UnitType { get; set; }
     public required decimal Price { get; set; }
-    public ProductEntity Product { get; set; } = null!;
     public DateTimeOffset Created { get; set; }
     public byte[] Version { get; set; } = null!;
+    public ProductEntity Product { get; set; } = null!;
   }
 }
