@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  managefood.api:
+  manage-food-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:577;http://+:910

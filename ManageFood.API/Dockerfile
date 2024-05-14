@@ -1,12 +1,15 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+ARG DOTNET_RUNTIME=mcr.microsoft.com/dotnet/aspnet:8.0
+ARG DOTNET_SDK=mcr.microsoft.com/dotnet/sdk:8.0
+
+FROM $DOTNET_RUNTIME AS base
 USER app
 WORKDIR /app
 EXPOSE 910
 EXPOSE 577
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM $DOTNET_SDK AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ManageFood.API/ManageFood.API.csproj", "ManageFood.API/"]
@@ -15,6 +18,9 @@ COPY ["ManageFood.Domain.Entities/ManageFood.Domain.Entities.csproj", "ManageFoo
 COPY ["ManageFood.Domain.Helpers/ManageFood.Domain.Helpers.csproj", "ManageFood.Domain.Helpers/"]
 COPY ["ManageFood.Domain/ManageFood.Domain.csproj", "ManageFood.Domain/"]
 COPY ["ManageFood.Infrastructure/ManageFood.Infrastructure.csproj", "ManageFood.Infrastructure/"]
+
+COPY ["ManageFood.Tests/ManageFood.Tests.csproj", "ManageFood.Tests/"]
+
 RUN dotnet restore "./ManageFood.API/ManageFood.API.csproj"
 COPY . .
 WORKDIR "/src/ManageFood.API"

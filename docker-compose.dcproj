@@ -7,8 +7,8 @@
     <ProjectGuid>c73fae06-3321-4642-b7eb-2be73617577e</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>managefood.api</DockerServiceName>
-    <DockerComposeProjectName>managefood3163534451</DockerComposeProjectName>
+    <DockerServiceName>manage-food-api</DockerServiceName>
+    <DockerComposeProjectName>manage-food-backend</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
