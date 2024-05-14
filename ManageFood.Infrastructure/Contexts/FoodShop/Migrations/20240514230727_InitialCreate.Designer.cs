@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 {
     [DbContext(typeof(FoodShopContext))]
-    [Migration("20240507172102_InitialCreate")]
+    [Migration("20240514230727_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -101,8 +101,8 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(7, 2)
-                        .HasColumnType("decimal(7,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -110,9 +110,9 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                     b.Property<int>("QuantityAvailable")
                         .HasColumnType("int");
 
-                    b.Property<float>("Unit")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("real(5)");
+                    b.Property<decimal>("Unit")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
 
                     b.Property<string>("UnitType")
                         .IsRequired()
@@ -128,7 +128,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Inventoy", "dbo");
+                    b.ToTable("Inventory", "dbo");
 
                     b.HasData(
                         new
@@ -138,7 +138,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 4400.5m,
                             Quantity = 24,
                             QuantityAvailable = 20,
-                            Unit = 500.2f,
+                            Unit = 500.2m,
                             UnitType = "G"
                         },
                         new
@@ -148,7 +148,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 3250.44m,
                             Quantity = 66,
                             QuantityAvailable = 51,
-                            Unit = 340.5f,
+                            Unit = 340.5m,
                             UnitType = "G"
                         },
                         new
@@ -158,7 +158,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 8990.50m,
                             Quantity = 10,
                             QuantityAvailable = 8,
-                            Unit = 220f,
+                            Unit = 220m,
                             UnitType = "G"
                         },
                         new
@@ -168,7 +168,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 9120.50m,
                             Quantity = 120,
                             QuantityAvailable = 68,
-                            Unit = 1000.8f,
+                            Unit = 1000.8m,
                             UnitType = "G"
                         },
                         new
@@ -178,7 +178,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 2490.10m,
                             Quantity = 310,
                             QuantityAvailable = 310,
-                            Unit = 500f,
+                            Unit = 500m,
                             UnitType = "G"
                         },
                         new
@@ -188,7 +188,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 55500m,
                             Quantity = 8,
                             QuantityAvailable = 7,
-                            Unit = 720.2f,
+                            Unit = 720.2m,
                             UnitType = "G"
                         },
                         new
@@ -198,7 +198,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 15167.50m,
                             Quantity = 13,
                             QuantityAvailable = 9,
-                            Unit = 250.5f,
+                            Unit = 250.5m,
                             UnitType = "G"
                         },
                         new
@@ -208,7 +208,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 17430.40m,
                             Quantity = 45,
                             QuantityAvailable = 43,
-                            Unit = 500f,
+                            Unit = 500m,
                             UnitType = "G"
                         },
                         new
@@ -218,7 +218,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 5200.5m,
                             Quantity = 80,
                             QuantityAvailable = 71,
-                            Unit = 250.5f,
+                            Unit = 250.5m,
                             UnitType = "G"
                         },
                         new
@@ -228,7 +228,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 7900m,
                             Quantity = 33,
                             QuantityAvailable = 11,
-                            Unit = 200f,
+                            Unit = 200m,
                             UnitType = "G"
                         },
                         new
@@ -238,7 +238,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 22000m,
                             Quantity = 29,
                             QuantityAvailable = 22,
-                            Unit = 7200f,
+                            Unit = 7200m,
                             UnitType = "Ml"
                         },
                         new
@@ -248,7 +248,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 48250.50m,
                             Quantity = 19,
                             QuantityAvailable = 19,
-                            Unit = 1.3f,
+                            Unit = 1.3m,
                             UnitType = "Lt"
                         },
                         new
@@ -258,7 +258,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             Price = 2720.80m,
                             Quantity = 50,
                             QuantityAvailable = 29,
-                            Unit = 400f,
+                            Unit = 400m,
                             UnitType = "Ml"
                         });
                 });
@@ -294,6 +294,8 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                         .HasColumnType("rowversion");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("CatalogueId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -658,7 +660,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                 {
                     b.HasOne("ManageFood.Domain.Entities.FoodShop.CatalogueEntity", "Catalogue")
                         .WithMany("Products")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("CatalogueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

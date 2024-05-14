@@ -3,9 +3,6 @@ using ManageFood.API.Extensions;
 using ManageFood.API.Modules;
 using ManageFood.API.Options;
 using ManageFood.Domain.Helpers;
-using ManageFood.Domain.SeedWork;
-using ManageFood.Infrastructure.Contexts.FoodShop;
-using Microsoft.EntityFrameworkCore;
 
 namespace ManageFood.API
 {
@@ -20,7 +17,8 @@ namespace ManageFood.API
     // Register your own things directly with Autofac here.
     public static void ConfigureContainer(ContainerBuilder builder)
     {
-      builder.RegisterModule<DomainModule>();
+      builder.RegisterModule<DbModule>();
+      builder.RegisterModule<RepositoriesModule>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,7 +27,6 @@ namespace ManageFood.API
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
-
         SwaggerOptions? swagger = _configuration.GetSection(nameof(SwaggerOptions)).Get<SwaggerOptions>();
         if (swagger is not null)
         {
@@ -37,15 +34,10 @@ namespace ManageFood.API
           app.UseSwaggerUI(options => options.SwaggerEndpoint(swagger.UIEndpoint, swagger.Description));
         }
       }
-
       app.UseCors(ApiConfigKeys.AllowOrigins);
-
       app.UseHttpsRedirection();
-
       app.UseRouting();
-
       app.UseAuthorization();
-
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();

@@ -117,8 +117,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .IsRowVersion();
       builder.HasOne(property => property.Role)
         .WithMany(many => many.Users)
-        .HasForeignKey(key => key.RoleId)
-        .OnDelete(DeleteBehavior.Cascade);
+        .HasForeignKey(key => key.RoleId);
       builder.HasIndex(index => new { index.DocumentNumber, index.Username, index.Email })
         .IsUnique();
     }

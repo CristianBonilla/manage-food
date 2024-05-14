@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ManageFood.Contracts.Repository;
 
-namespace ManageFood.Infrastructure.Repository
+namespace ManageFood.Infrastructure.Repositories
 {
   public class RepositoryContext<TContext>(TContext context) : IRepositoryContext<TContext> where TContext : DbContext
   {

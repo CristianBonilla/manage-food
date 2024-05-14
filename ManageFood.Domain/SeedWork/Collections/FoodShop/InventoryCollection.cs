@@ -21,7 +21,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 24,
           QuantityAvailable = 20,
           UnitType = UnitType.Gram,
-          Unit = 500.2F,
+          Unit = 500.2M,
           Price = 4400.5M,
           Created = _products[0].Created,
         },
@@ -31,7 +31,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 66,
           QuantityAvailable = 51,
           UnitType = UnitType.Gram,
-          Unit = 340.5F,
+          Unit = 340.5M,
           Price = 3250.44M,
           Created = _products[1].Created,
         },
@@ -41,7 +41,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 10,
           QuantityAvailable = 8,
           UnitType = UnitType.Gram,
-          Unit = 220F,
+          Unit = 220M,
           Price = 8990.50M,
           Created = _products[2].Created,
         },
@@ -51,7 +51,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 120,
           QuantityAvailable = 68,
           UnitType = UnitType.Gram,
-          Unit = 1000.8F,
+          Unit = 1000.8M,
           Price = 9120.50M,
           Created = _products[3].Created
         },
@@ -61,7 +61,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 310,
           QuantityAvailable = 310,
           UnitType = UnitType.Gram,
-          Unit = 500F,
+          Unit = 500M,
           Price = 2490.10M,
           Created = _products[4].Created
         },
@@ -71,7 +71,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 8,
           QuantityAvailable = 7,
           UnitType = UnitType.Gram,
-          Unit = 720.2F,
+          Unit = 720.2M,
           Price = 55500M,
           Created = _products[5].Created
         },
@@ -81,7 +81,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 13,
           QuantityAvailable = 9,
           UnitType = UnitType.Gram,
-          Unit = 250.5F,
+          Unit = 250.5M,
           Price = 15167.50M,
           Created = _products[6].Created
         },
@@ -91,7 +91,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 45,
           QuantityAvailable = 43,
           UnitType = UnitType.Gram,
-          Unit = 500F,
+          Unit = 500M,
           Price = 17430.40M,
           Created = _products[7].Created
         },
@@ -101,7 +101,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 80,
           QuantityAvailable = 71,
           UnitType = UnitType.Gram,
-          Unit = 250.5F,
+          Unit = 250.5M,
           Price = 5200.5M,
           Created = _products[8].Created
         },
@@ -111,7 +111,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 33,
           QuantityAvailable = 11,
           UnitType = UnitType.Gram,
-          Unit = 200F,
+          Unit = 200M,
           Price = 7900M,
           Created = _products[9].Created
         },
@@ -121,7 +121,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 29,
           QuantityAvailable = 22,
           UnitType = UnitType.Milliliter,
-          Unit = 7200F,
+          Unit = 7200M,
           Price = 22000M,
           Created = _products[10].Created
         },
@@ -131,7 +131,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 19,
           QuantityAvailable = 19,
           UnitType = UnitType.Liter,
-          Unit = 1.3F,
+          Unit = 1.3M,
           Price = 48250.50M,
           Created = _products[11].Created
         },
@@ -141,7 +141,7 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
           Quantity = 50,
           QuantityAvailable = 29,
           UnitType = UnitType.Milliliter,
-          Unit = 400F,
+          Unit = 400M,
           Price = 2720.80M,
           Created = _products[12].Created
         }

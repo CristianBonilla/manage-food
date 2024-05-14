@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ManageFood.Contracts.Repository;
 
-namespace ManageFood.Infrastructure.Repository
+namespace ManageFood.Infrastructure.Repositories
 {
   public class Repository<TContext, TEntity>(IRepositoryContext<TContext> context) : IRepository<TContext, TEntity>
     where TContext : DbContext

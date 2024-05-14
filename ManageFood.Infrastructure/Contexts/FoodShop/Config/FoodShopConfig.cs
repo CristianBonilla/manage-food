@@ -55,7 +55,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .IsRowVersion();
       builder.HasOne(one => one.Catalogue)
         .WithMany(many => many.Products)
-        .HasForeignKey(key => key.ProductId);
+        .HasForeignKey(key => key.CatalogueId);
       builder.HasIndex(index => new { index.Name })
         .IsUnique();
       if (seedData is not null)
@@ -67,14 +67,14 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
   {
     public void Configure(EntityTypeBuilder<InventoryEntity> builder)
     {
-      builder.ToTable("Inventoy", "dbo")
+      builder.ToTable("Inventory", "dbo")
         .HasKey(key => key.ProductId);
       builder.Property(property => property.Quantity)
         .IsRequired();
       builder.Property(property => property.QuantityAvailable)
         .IsRequired();
       builder.Property(property => property.Unit)
-        .HasPrecision(5, 2)
+        .HasPrecision(9, 2)
         .IsRequired();
       builder.Property(property => property.UnitType)
         .HasConversion(unitType => unitType.Value, value => StringEnumeration.FromValue<UnitType>(value) ?? UnitType.Gram)
@@ -82,7 +82,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .IsUnicode(false)
         .IsRequired();
       builder.Property(property => property.Price)
-        .HasPrecision(7, 2)
+        .HasPrecision(10, 2)
         .IsRequired();
       builder.Property(property => property.Created)
         .HasDefaultValueSql("GETUTCDATE()");
