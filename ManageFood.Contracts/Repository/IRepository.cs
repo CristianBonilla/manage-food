@@ -16,8 +16,8 @@ namespace ManageFood.Contracts.Repository
     TEntity? Find(params object[] primaryKeys);
     TEntity? Find(Expression<Func<TEntity, bool>> predicate);
     bool Exists(Expression<Func<TEntity, bool>> predicate);
-    IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, bool>>[] includes);
-    IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, bool>>[] includesd);
-    IEnumerable<TEntity> GetByOrder(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, params Expression<Func<TEntity, bool>>[] includes);
+    IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes);
+    IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includesd);
+    IEnumerable<TEntity> GetByOrder(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, params Expression<Func<TEntity, object>>[] includes);
   }
 }

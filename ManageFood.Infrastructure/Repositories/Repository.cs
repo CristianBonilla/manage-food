@@ -73,19 +73,19 @@ namespace ManageFood.Infrastructure.Repositories
 
     public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entitySet.Any(predicate);
 
-    public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, bool>>[] includes) => Includes(null, includes);
+    public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes) => Includes(null, includes);
 
     public IEnumerable<TEntity> GetByFilter(
       Expression<Func<TEntity, bool>> filter,
-      params Expression<Func<TEntity, bool>>[] includes) => Includes(_entitySet.Where(filter), includes);
+      params Expression<Func<TEntity, object>>[] includes) => Includes(_entitySet.Where(filter), includes);
 
     public IEnumerable<TEntity> GetByOrder(
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
-      params Expression<Func<TEntity, bool>>[] includes) => Includes(orderBy(_entitySet.AsQueryable()), includes);
+      params Expression<Func<TEntity, object>>[] includes) => Includes(orderBy(_entitySet.AsQueryable()), includes);
 
     private IEnumerable<TEntity> Includes(
       IQueryable<TEntity>? entities,
-      params Expression<Func<TEntity, bool>>[] includes)
+      params Expression<Func<TEntity, object>>[] includes)
     {
       entities ??= _entitySet;
       if (includes.Length == 0)
