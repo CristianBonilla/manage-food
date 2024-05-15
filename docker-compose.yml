@@ -14,8 +14,6 @@ services:
       dockerfile: ManageFood.API/Dockerfile
     depends_on:
       - manage-food-db
-    links:
-      - manage-food-db
     networks:
       - manage-food-network
 
