@@ -1,4 +1,3 @@
-using ManageFood.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -6,25 +5,37 @@ namespace ManageFood.API.Extensions
 {
   static class DbStartExtensions
   {
-    public static async Task DbStart<TContext>(this IHost host, DbInitializers initializer) where TContext : DbContext
+    public static (Func<Task> OpenConnection, Func<Task> EnsureCreated, Func<Task> Migration) DbStart<TContext>(this IHost host) where TContext : DbContext
     {
-      await using AsyncServiceScope scope = host.Services.CreateAsyncScope();
-      DatabaseFacade database = DatabaseInstance<TContext>(scope);
-
-      await (initializer switch
-      {
-        DbInitializers.OpenConnection => database.OpenConnectionAsync(),
-        DbInitializers.EnsureCreated => database.EnsureCreatedAsync(),
-        DbInitializers.Migrate => database.MigrateAsync(),
-        _ => throw new ArgumentOutOfRangeException(nameof(initializer), $"Not expected initializer value: {initializer}")
-      });
-    }
-
-    private static DatabaseFacade DatabaseInstance<TContext>(AsyncServiceScope scope) where TContext : DbContext
-    {
+      AsyncServiceScope scope = host.Services.CreateAsyncScope();
       TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
+      DatabaseFacade database = context.Database;
 
-      return context.Database;
+      return (OpenConnection, EnsureCreated, Migration);
+
+      async Task OpenConnection()
+      {
+        await using (scope.ConfigureAwait(false))
+        {
+          await database.OpenConnectionAsync();
+        }
+      }
+
+      async Task EnsureCreated()
+      {
+        await using (scope.ConfigureAwait(false))
+        {
+          await database.EnsureCreatedAsync();
+        }
+      }
+
+      async Task Migration()
+      {
+        await using (scope.ConfigureAwait(false))
+        {
+          await database.MigrateAsync();
+        }
+      }
     }
   }
 }
