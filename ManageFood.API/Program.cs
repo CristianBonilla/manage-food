@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Autofac.Extensions.DependencyInjection;
+using ManageFood.API.Extensions;
+using ManageFood.Contracts;
 using ManageFood.Infrastructure.Contexts.FoodShop;
 
 namespace ManageFood.API
@@ -9,7 +10,7 @@ namespace ManageFood.API
     public static async Task Main(string[] args)
     {
       IHost host = CreateHostBuilder(args).Build();
-      await DbMigrationStart<FoodShopContext>(host);
+      await host.DbStart<FoodShopContext>(DbInitializers.Migrate);
       await host.RunAsync();
     }
 
@@ -20,12 +21,5 @@ namespace ManageFood.API
         {
           builder.UseStartup<Startup>();
         });
-
-    private static async Task DbMigrationStart<TContext>(IHost host) where TContext : DbContext
-    {
-      using IServiceScope scope = host.Services.CreateScope();
-      TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
-      await context.Database.MigrateAsync();
-    }
   }
 }
