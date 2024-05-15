@@ -9,7 +9,10 @@ namespace ManageFood.API.Installers
     public void InstallServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
       string? connectionString = configuration.GetConnectionString(ApiConfigKeys.ManageFoodConnection) ?? throw new InvalidOperationException($"Connection string '{ApiConfigKeys.ManageFoodConnection}' not established");
-      services.AddDbContextPool<FoodShopContext>(options => options.UseSqlServer(connectionString));
+      services.AddDbContextPool<FoodShopContext>(options => options.UseSqlServer(connectionString, builder =>
+      {
+        builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(10), null);
+      }));
     }
   }
 }
