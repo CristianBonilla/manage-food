@@ -19,6 +19,8 @@ namespace ManageFood.API
     {
       builder.RegisterModule<DbModule>();
       builder.RegisterModule<RepositoriesModule>();
+      builder.RegisterModule<AuthModule>();
+      builder.RegisterModule<FoodShopModule>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
