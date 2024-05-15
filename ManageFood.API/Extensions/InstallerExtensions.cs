@@ -10,7 +10,7 @@ namespace ManageFood.API.Extensions
       IConfiguration configuration,
       IWebHostEnvironment env)
     {
-      var installers = Assembly.GetExecutingAssembly().GetTypes()
+      IInstaller[] installers = Assembly.GetExecutingAssembly().GetTypes()
         .Where(type => typeof(IInstaller).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
         .Select(Activator.CreateInstance)
         .Cast<IInstaller>()
