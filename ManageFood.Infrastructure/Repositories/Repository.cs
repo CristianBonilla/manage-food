@@ -67,9 +67,9 @@ namespace ManageFood.Infrastructure.Repositories
       }
     }
 
-    public TEntity? Find(params object[] primaryKeys) => _entitySet.Find(primaryKeys);
+    public TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] includes) => Include(_entitySet.Find(keyValues), includes);
 
-    public TEntity? Find(Expression<Func<TEntity, bool>> predicate) => _entitySet.FirstOrDefault(predicate);
+    public TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes) => Include(_entitySet.FirstOrDefault(predicate), includes);
 
     public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entitySet.Any(predicate);
 
@@ -82,6 +82,10 @@ namespace ManageFood.Infrastructure.Repositories
     public IEnumerable<TEntity> GetByOrder(
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
       params Expression<Func<TEntity, object>>[] includes) => Includes(orderBy(_entitySet.AsQueryable()), includes);
+
+    private TEntity? Include(
+      TEntity? entity,
+      params Expression<Func<TEntity, object>>[] includes) => entity is not null ? Includes(new[] { entity }.AsQueryable(), includes).Single() : null;
 
     private IEnumerable<TEntity> Includes(
       IQueryable<TEntity>? entities,

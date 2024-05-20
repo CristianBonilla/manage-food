@@ -13,8 +13,8 @@ namespace ManageFood.Contracts.Repository
     IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities);
     TEntity Delete(TEntity entity);
     IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities);
-    TEntity? Find(params object[] primaryKeys);
-    TEntity? Find(Expression<Func<TEntity, bool>> predicate);
+    TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] includes);
+    TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes);
     bool Exists(Expression<Func<TEntity, bool>> predicate);
     IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes);
     IEnumerable<TEntity> GetByFilter(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includesd);
