@@ -1,4 +1,6 @@
 using Autofac;
+using ManageFood.Contracts.Services;
+using ManageFood.Domain.Services;
 using ManageFood.Infrastructure.Repositories.Auth;
 using ManageFood.Infrastructure.Repositories.Auth.Interfaces;
 
@@ -19,6 +21,10 @@ namespace ManageFood.API.Modules
         .InstancePerLifetimeScope();
       builder.RegisterType<UserRepository>()
         .As<IUserRepository>()
+        .InstancePerLifetimeScope();
+
+      builder.RegisterType<AuthService>()
+        .As<IAuthService>()
         .InstancePerLifetimeScope();
     }
   }
