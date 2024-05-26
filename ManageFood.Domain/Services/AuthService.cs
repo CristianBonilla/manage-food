@@ -38,7 +38,7 @@ namespace ManageFood.Domain.Services
       return user;
     }
 
-    public Task<RoleEntity?> FindRole(Expression<Func<RoleEntity, bool>> predicate) => Task.FromResult(_roleRepository.Find(predicate, role => role.Users));
+    public Task<RoleEntity?> FindRole(Expression<Func<RoleEntity, bool>> predicate) => Task.FromResult(_roleRepository.Find(predicate, role => role.RolePermissions));
 
     public Task<UserEntity?> FindUser(Expression<Func<UserEntity, bool>> predicate) => Task.FromResult(_userRepository.Find(predicate, user => user.Role));
 

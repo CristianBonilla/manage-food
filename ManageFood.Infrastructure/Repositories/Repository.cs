@@ -67,37 +67,35 @@ namespace ManageFood.Infrastructure.Repositories
       }
     }
 
-    public TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] includes) => Include(_entitySet.Find(keyValues), includes);
+    public TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] navigations)
+    {
+      TEntity? found = _entitySet.Find(keyValues);
 
-    public TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes) => Include(_entitySet.FirstOrDefault(predicate), includes);
+      return found is not null ? WithNavigations(navigations).SingleOrDefault(entity => entity == found) : null;
+    }
+
+    public TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] navigations) => WithNavigations(navigations).FirstOrDefault(predicate);
 
     public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entitySet.Any(predicate);
 
     public IEnumerable<TEntity> GetAll(
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-      params Expression<Func<TEntity, object>>[] includes) => Includes(orderBy is not null ? orderBy(_entitySet.AsQueryable()) : null, includes);
+      params Expression<Func<TEntity, object>>[] navigations) => [.. orderBy is not null ? orderBy(WithNavigations(navigations)).AsQueryable() : WithNavigations(navigations)];
 
     public IEnumerable<TEntity> GetByFilter(
       Expression<Func<TEntity, bool>> filter,
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-      params Expression<Func<TEntity, object>>[] includes) => Includes(orderBy is not null ? orderBy(_entitySet.Where(filter)) : _entitySet.Where(filter), includes);
+      params Expression<Func<TEntity, object>>[] navigations) => [.. (orderBy is not null ? orderBy(WithNavigations(navigations)) : WithNavigations(navigations)).Where(filter)];
 
-    private TEntity? Include(
-      TEntity? entity,
-      params Expression<Func<TEntity, object>>[] includes) => entity is not null ? Includes(new[] { entity }.AsQueryable(), includes).Single() : null;
-
-    private IEnumerable<TEntity> Includes(
-      IQueryable<TEntity>? entities,
-      params Expression<Func<TEntity, object>>[] includes)
+    private IQueryable<TEntity> WithNavigations(params Expression<Func<TEntity, object>>[] navigations)
     {
-      entities ??= _entitySet;
-      if (includes.Length == 0)
-        return [.. entities];
-      var querySet = entities.AsQueryable();
-      foreach (var expression in includes)
+      if (navigations.Length == 0)
+        return _entitySet;
+      var querySet = _entitySet.AsQueryable();
+      foreach (var expression in navigations)
         querySet = querySet.Include(expression);
 
-      return [.. querySet];
+      return querySet;
     }
   }
 }

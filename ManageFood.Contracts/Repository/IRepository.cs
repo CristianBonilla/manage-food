@@ -13,15 +13,15 @@ namespace ManageFood.Contracts.Repository
     IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities);
     TEntity Delete(TEntity entity);
     IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities);
-    TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] includes);
-    TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes);
+    TEntity? Find(object[] keyValues, params Expression<Func<TEntity, object>>[] navigations);
+    TEntity? Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] navigations);
     bool Exists(Expression<Func<TEntity, bool>> predicate);
     IEnumerable<TEntity> GetAll(
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-      params Expression<Func<TEntity, object>>[] includes);
+      params Expression<Func<TEntity, object>>[] navigations);
     IEnumerable<TEntity> GetByFilter(
       Expression<Func<TEntity, bool>> filter,
       Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-      params Expression<Func<TEntity, object>>[] includes);
+      params Expression<Func<TEntity, object>>[] navigations);
   }
 }
