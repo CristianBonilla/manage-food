@@ -27,8 +27,8 @@ services:
       - MSSQL_USER=sa
       - MSSQL_SA_PASSWORD=ManageFood__Password
     ports:
-      - 8055:1433
+      - 8165:1433
     expose:
-      - 8055
+      - 8165
     networks:
       - manage-food-network

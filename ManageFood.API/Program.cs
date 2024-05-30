@@ -9,7 +9,7 @@ namespace ManageFood.API
     public static async Task Main(string[] args)
     {
       IHost host = CreateHostBuilder(args).Build();
-      await host.DbStart<FoodShopContext>().Migration();
+      await host.DbStart<FoodShopContext>().Migrate();
       await host.RunAsync();
     }
 

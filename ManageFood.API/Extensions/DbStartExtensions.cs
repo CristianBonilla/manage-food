@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -5,35 +6,44 @@ namespace ManageFood.API.Extensions
 {
   static class DbStartExtensions
   {
-    public static (Func<Task> OpenConnection, Func<Task> EnsureCreated, Func<Task> Migration) DbStart<TContext>(this IHost host) where TContext : DbContext
+    enum DbStartType
     {
-      AsyncServiceScope scope = host.Services.CreateAsyncScope();
-      TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
-      DatabaseFacade database = context.Database;
+      OpenConnection = 1,
+      EnsureCreated = 2,
+      Migrate = 3
+    }
 
-      return (OpenConnection, EnsureCreated, Migration);
+    public static (Func<Task> OpenConnection, Func<Task> EnsureCreated, Func<Task> Migrate) DbStart<TContext>(this IHost host) where TContext : DbContext
+    {
+      int delay = 0;
 
-      async Task OpenConnection()
+      return (() => Connect(DbStartType.OpenConnection), () => Connect(DbStartType.EnsureCreated), () => Connect(DbStartType.Migrate));
+
+      async Task Connect(DbStartType start)
       {
-        await using (scope.ConfigureAwait(false))
+        AsyncServiceScope scope = host.Services.CreateAsyncScope();
+        TContext context = scope.ServiceProvider.GetRequiredService<TContext>();
+        DatabaseFacade database = context.Database;
+        try
         {
-          await database.OpenConnectionAsync();
+
+          await using (scope.ConfigureAwait(false))
+          {
+            await (start switch
+            {
+              DbStartType.OpenConnection => database.OpenConnectionAsync(),
+              DbStartType.EnsureCreated => database.EnsureCreatedAsync(),
+              DbStartType.Migrate => database.MigrateAsync(),
+              _ => throw new ArgumentOutOfRangeException(nameof(start), $"Not expected direction value: {start}")
+            });
+            delay = 0;
+          }
         }
-      }
-
-      async Task EnsureCreated()
-      {
-        await using (scope.ConfigureAwait(false))
+        catch (SqlException)
         {
-          await database.EnsureCreatedAsync();
-        }
-      }
-
-      async Task Migration()
-      {
-        await using (scope.ConfigureAwait(false))
-        {
-          await database.MigrateAsync();
+          await Task.Delay(TimeSpan.FromSeconds(1));
+          Console.WriteLine($"{++delay} seconds have passed Connecting...");
+          await Connect(start);
         }
       }
     }
