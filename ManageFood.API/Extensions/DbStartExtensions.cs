@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -39,10 +39,10 @@ namespace ManageFood.API.Extensions
             delay = 0;
           }
         }
-        catch (SqlException)
+        catch (Exception exception) when (exception is InvalidOperationException || exception is DbException)
         {
           await Task.Delay(TimeSpan.FromSeconds(1));
-          Console.WriteLine($"{++delay} seconds have passed Connecting...");
+          Console.WriteLine($"{++delay} seconds have passed, an error occurred, retrying. Connecting...");
           await Connect(start);
         }
       }
