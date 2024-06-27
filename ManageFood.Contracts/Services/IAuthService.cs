@@ -7,10 +7,11 @@ namespace ManageFood.Contracts.Services
   {
     Task<RoleEntity> AddRole(RoleEntity role, params Guid[] permissionIDs);
     Task<UserEntity> AddUser(UserEntity user);
-    Task<RoleEntity?> FindRole(Expression<Func<RoleEntity, bool>> predicate);
-    Task<UserEntity?> FindUser(Expression<Func<UserEntity, bool>> predicate);
-    Task<bool> RoleExists(Expression<Func<RoleEntity, bool>> predicate);
-    Task<bool> UserExists(Expression<Func<UserEntity, bool>> predicate);
+    Task<RoleEntity?> FindRoleById(Guid roleId);
+    Task<RoleEntity?> FindRoleByName(string roleName);
+    Task<UserEntity?> FindUserById(Guid userId);
+    Task<UserEntity?> FindUserByUsername(string username);
+    Task<UserEntity?> FindUserByEmail(string email);
     IAsyncEnumerable<RoleEntity> GetRoles();
     IAsyncEnumerable<PermissionEntity> GetPermissionsByRoleId(Guid roleId);
     IAsyncEnumerable<UserEntity> GetUsers();

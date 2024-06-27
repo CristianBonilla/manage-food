@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using ManageFood.Contracts.Services;
 using ManageFood.Domain.Entities;
 using ManageFood.Infrastructure.Repositories.Auth.Interfaces;
@@ -38,13 +37,15 @@ namespace ManageFood.Domain.Services
       return user;
     }
 
-    public Task<RoleEntity?> FindRole(Expression<Func<RoleEntity, bool>> predicate) => Task.FromResult(_roleRepository.Find(predicate, role => role.RolePermissions));
+    public Task<RoleEntity?> FindRoleById(Guid roleId) => Task.FromResult(_roleRepository.Find([roleId], role => role.RolePermissions));
 
-    public Task<UserEntity?> FindUser(Expression<Func<UserEntity, bool>> predicate) => Task.FromResult(_userRepository.Find(predicate, user => user.Role));
+    public Task<RoleEntity?> FindRoleByName(string roleName) => Task.FromResult(_roleRepository.Find(role => role.Name == roleName, role => role.RolePermissions));
 
-    public Task<bool> RoleExists(Expression<Func<RoleEntity, bool>> predicate) => Task.FromResult(_roleRepository.Exists(predicate));
+    public Task<UserEntity?> FindUserById(Guid userId) => Task.FromResult(_userRepository.Find([userId], user => user.Role));
 
-    public Task<bool> UserExists(Expression<Func<UserEntity, bool>> predicate) => Task.FromResult(_userRepository.Exists(predicate));
+    public Task<UserEntity?> FindUserByUsername(string username) => Task.FromResult(_userRepository.Find(user => user.Username == username, role => role.Role));
+
+    public Task<UserEntity?> FindUserByEmail(string email) => Task.FromResult(_userRepository.Find(user => user.Email == email, user => user.Role));
 
     public IAsyncEnumerable<PermissionEntity> GetPermissionsByRoleId(Guid roleId)
     {
