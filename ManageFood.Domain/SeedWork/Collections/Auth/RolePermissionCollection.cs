@@ -46,7 +46,5 @@ namespace ManageFood.Domain.SeedWork.Collections.Auth
         Created = new DateTimeOffset(2024, 3, 28, 1, 22, 0, TimeSpan.FromHours(3))
       }
     ];
-
-    public RolePermissionCollection() : base(6) { }
   }
 }

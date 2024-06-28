@@ -7,5 +7,6 @@ namespace ManageFood.Domain.SeedWork.Collections
     public static RoleCollection Roles => new();
     public static PermissionCollection Permissions => new();
     public static RolePermissionCollection RolePermissions => new();
+    public static UserCollection Users => new();
   }
 }

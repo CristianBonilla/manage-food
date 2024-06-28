@@ -9,7 +9,8 @@ namespace ManageFood.Domain.SeedWork
     {
       Roles = AuthCollection.Roles,
       Permissions = AuthCollection.Permissions,
-      RolePermissions = AuthCollection.RolePermissions
+      RolePermissions = AuthCollection.RolePermissions,
+      Users = AuthCollection.Users
     };
 
     public SeedFoodShopData FoodShop => new()

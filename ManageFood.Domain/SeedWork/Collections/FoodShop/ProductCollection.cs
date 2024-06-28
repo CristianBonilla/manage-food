@@ -104,7 +104,5 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
         Created = new DateTimeOffset(2024, 2, 22, 9, 10, 0, TimeSpan.FromHours(3))
       }
     ];
-
-    public ProductCollection() : base(13) { }
   }
 }

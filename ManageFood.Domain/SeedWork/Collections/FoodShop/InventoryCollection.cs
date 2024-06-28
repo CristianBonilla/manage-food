@@ -140,7 +140,5 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
         Created = _products[12].Created
       }
     ];
-
-    public InventoryCollection() : base(13) { }
   }
 }

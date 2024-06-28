@@ -32,7 +32,5 @@ namespace ManageFood.Domain.SeedWork.Collections.FoodShop
         Created = new DateTimeOffset(2024, 2, 19, 18, 0, 0, TimeSpan.FromHours(3))
       }
     ];
-
-    public CatalogueCollection() : base(4) { }
   }
 }
