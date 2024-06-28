@@ -16,7 +16,8 @@ namespace ManageFood.Domain.SeedWork
     {
       Catalogues = FoodShopCollection.Catalogues,
       Products = FoodShopCollection.Products,
-      Inventories = FoodShopCollection.Inventories
+      Inventories = FoodShopCollection.Inventories,
+      Orders = FoodShopCollection.Orders
     };
   }
 }

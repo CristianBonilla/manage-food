@@ -7,5 +7,6 @@ namespace ManageFood.Domain.SeedWork.Collections
     public static CatalogueCollection Catalogues => new();
     public static ProductCollection Products => new();
     public static InventoryCollection Inventories => new();
+    public static OrderCollection Orders => new();
   }
 }
