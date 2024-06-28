@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 {
     [DbContext(typeof(FoodShopContext))]
-    [Migration("20240514230727_InitialCreate")]
+    [Migration("20240628075311_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -260,6 +260,55 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                             QuantityAvailable = 29,
                             Unit = 400m,
                             UnitType = "Ml"
+                        });
+                });
+
+            modelBuilder.Entity("ManageFood.Domain.Entities.FoodShop.OrderEntity", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Order", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = new Guid("e384af28-6c38-4bf2-83cc-18ae3b58a23a"),
+                            Created = new DateTimeOffset(new DateTime(2024, 4, 1, 20, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            ProductId = new Guid("8b0ce0e2-2850-4673-bc32-8cfd0554409b"),
+                            UserId = new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53")
+                        },
+                        new
+                        {
+                            OrderId = new Guid("4520742c-0ed4-4b5f-bb2b-887be306fb85"),
+                            Created = new DateTimeOffset(new DateTime(2024, 4, 3, 17, 8, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            ProductId = new Guid("9037cc53-fa37-4dd6-8833-40d583fd2371"),
+                            UserId = new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53")
                         });
                 });
 
@@ -607,7 +656,9 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 
                     b.Property<string>("DocumentNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -621,11 +672,20 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -633,6 +693,10 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -650,10 +714,46 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("DocumentNumber", "Username", "Email")
+                    b.HasIndex("DocumentNumber", "Username", "Email", "Mobile")
                         .IsUnique();
 
                     b.ToTable("User", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53"),
+                            Created = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DocumentNumber = "1023944678",
+                            Email = "cristian10camilo95@gmail.com",
+                            Firstname = "Cristian Camilo",
+                            IsActive = true,
+                            Lastname = "Bonilla",
+                            Mobile = "+573163534451",
+                            Password = "o4hTayQHtuHGqG8+SEcSJHvbaSazKKAsw+XcrEas7LaifS+jpLuf0VoPlHlHL6LTqIXQPKr7b+F2aF8Cp9piPw==",
+                            RoleId = new Guid("d146b771-7df4-411f-8ccb-490b2d65d22f"),
+                            Salt = new byte[] { 163, 136, 83, 107, 36, 7, 182, 225, 198, 168, 111, 62, 72, 71, 18, 36, 123, 219, 105, 38, 179, 40, 160, 44, 195, 229, 220, 172, 70, 172, 236, 182 },
+                            Username = "chris__boni"
+                        });
+                });
+
+            modelBuilder.Entity("ManageFood.Domain.Entities.FoodShop.OrderEntity", b =>
+                {
+                    b.HasOne("ManageFood.Domain.Entities.FoodShop.ProductEntity", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ManageFood.Domain.Entities.UserEntity", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ManageFood.Domain.Entities.FoodShop.ProductEntity", b =>
@@ -714,6 +814,11 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ManageFood.Domain.Entities.FoodShop.ProductEntity", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("ManageFood.Domain.Entities.PermissionEntity", b =>
                 {
                     b.Navigation("RolePermissions");
@@ -724,6 +829,11 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                     b.Navigation("RolePermissions");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("ManageFood.Domain.Entities.UserEntity", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

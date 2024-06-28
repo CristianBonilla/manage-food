@@ -151,12 +151,15 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
           {
             UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
             RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-            DocumentNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+            DocumentNumber = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: false),
+            Mobile = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: false),
             Username = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
             Password = table.Column<string>(type: "varchar(max)", nullable: false),
             Email = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
             Firstname = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
             Lastname = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
+            IsActive = table.Column<bool>(type: "bit", nullable: false),
+            Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
             Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "GETUTCDATE()"),
             Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
           },
@@ -169,6 +172,36 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                       principalSchema: "dbo",
                       principalTable: "Role",
                       principalColumn: "RoleId",
+                      onDelete: ReferentialAction.Cascade);
+          });
+
+      migrationBuilder.CreateTable(
+          name: "Order",
+          schema: "dbo",
+          columns: table => new
+          {
+            OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+            UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+            ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+            Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "GETUTCDATE()"),
+            Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+          },
+          constraints: table =>
+          {
+            table.PrimaryKey("PK_Order", x => x.OrderId);
+            table.ForeignKey(
+                      name: "FK_Order_Product_ProductId",
+                      column: x => x.ProductId,
+                      principalSchema: "dbo",
+                      principalTable: "Product",
+                      principalColumn: "ProductId",
+                      onDelete: ReferentialAction.Cascade);
+            table.ForeignKey(
+                      name: "FK_Order_User_UserId",
+                      column: x => x.UserId,
+                      principalSchema: "dbo",
+                      principalTable: "User",
+                      principalColumn: "UserId",
                       onDelete: ReferentialAction.Cascade);
           });
 
@@ -262,12 +295,40 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
                     { new Guid("e74c1d1b-c402-43d1-9492-0df9a67729c8"), new Guid("d146b771-7df4-411f-8ccb-490b2d65d22f"), new DateTimeOffset(new DateTime(2024, 3, 25, 4, 28, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)) }
           });
 
+      migrationBuilder.InsertData(
+          schema: "dbo",
+          table: "User",
+          columns: new[] { "UserId", "DocumentNumber", "Email", "Firstname", "IsActive", "Lastname", "Mobile", "Password", "RoleId", "Salt", "Username" },
+          values: new object[] { new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53"), "1023944678", "cristian10camilo95@gmail.com", "Cristian Camilo", true, "Bonilla", "+573163534451", "o4hTayQHtuHGqG8+SEcSJHvbaSazKKAsw+XcrEas7LaifS+jpLuf0VoPlHlHL6LTqIXQPKr7b+F2aF8Cp9piPw==", new Guid("d146b771-7df4-411f-8ccb-490b2d65d22f"), new byte[] { 163, 136, 83, 107, 36, 7, 182, 225, 198, 168, 111, 62, 72, 71, 18, 36, 123, 219, 105, 38, 179, 40, 160, 44, 195, 229, 220, 172, 70, 172, 236, 182 }, "chris__boni" });
+
+      migrationBuilder.InsertData(
+          schema: "dbo",
+          table: "Order",
+          columns: new[] { "OrderId", "Created", "ProductId", "UserId" },
+          values: new object[,]
+          {
+                    { new Guid("4520742c-0ed4-4b5f-bb2b-887be306fb85"), new DateTimeOffset(new DateTime(2024, 4, 3, 17, 8, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), new Guid("9037cc53-fa37-4dd6-8833-40d583fd2371"), new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53") },
+                    { new Guid("e384af28-6c38-4bf2-83cc-18ae3b58a23a"), new DateTimeOffset(new DateTime(2024, 4, 1, 20, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), new Guid("8b0ce0e2-2850-4673-bc32-8cfd0554409b"), new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53") }
+          });
+
       migrationBuilder.CreateIndex(
           name: "IX_Catalogue_Name",
           schema: "dbo",
           table: "Catalogue",
           column: "Name",
           unique: true);
+
+      migrationBuilder.CreateIndex(
+          name: "IX_Order_ProductId",
+          schema: "dbo",
+          table: "Order",
+          column: "ProductId");
+
+      migrationBuilder.CreateIndex(
+          name: "IX_Order_UserId",
+          schema: "dbo",
+          table: "Order",
+          column: "UserId");
 
       migrationBuilder.CreateIndex(
           name: "IX_Permission_Name_DisplayName",
@@ -303,10 +364,10 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
           column: "PermissionId");
 
       migrationBuilder.CreateIndex(
-          name: "IX_User_DocumentNumber_Username_Email",
+          name: "IX_User_DocumentNumber_Username_Email_Mobile",
           schema: "dbo",
           table: "User",
-          columns: new[] { "DocumentNumber", "Username", "Email" },
+          columns: new[] { "DocumentNumber", "Username", "Email", "Mobile" },
           unique: true);
 
       migrationBuilder.CreateIndex(
@@ -320,7 +381,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
     protected override void Down(MigrationBuilder migrationBuilder)
     {
       migrationBuilder.DropTable(
-          name: "Product",
+          name: "Order",
           schema: "dbo");
 
       migrationBuilder.DropTable(
@@ -328,7 +389,15 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
           schema: "dbo");
 
       migrationBuilder.DropTable(
+          name: "Product",
+          schema: "dbo");
+
+      migrationBuilder.DropTable(
           name: "User",
+          schema: "dbo");
+
+      migrationBuilder.DropTable(
+          name: "Permission",
           schema: "dbo");
 
       migrationBuilder.DropTable(
@@ -337,10 +406,6 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
 
       migrationBuilder.DropTable(
           name: "Inventory",
-          schema: "dbo");
-
-      migrationBuilder.DropTable(
-          name: "Permission",
           schema: "dbo");
 
       migrationBuilder.DropTable(
