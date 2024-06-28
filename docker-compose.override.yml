@@ -4,12 +4,12 @@ services:
   manage-food-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:577;http://+:910
-      - ASPNETCORE_HTTP_PORTS=10450
-      - ASPNETCORE_HTTPS_PORTS=12370
+      - ASPNETCORE_URLS=https://+:854;http://+:422
+      - ASPNETCORE_HTTPS_PORTS=19021
+      - ASPNETCORE_HTTP_PORTS=14881
     ports:
-      - "10450:910"
-      - "12370:577"
+      - "19021:854"
+      - "14881:422"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

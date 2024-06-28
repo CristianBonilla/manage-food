@@ -19,6 +19,7 @@ services:
 
   manage-food-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
     container_name: manage-food-DB
     hostname: sql-server
     environment:
@@ -27,8 +28,13 @@ services:
       - MSSQL_USER=sa
       - MSSQL_SA_PASSWORD=ManageFood__Password
     ports:
-      - 8165:1433
+      - 9765:1433
     expose:
-      - 8165
+      - 9765
+    volumes:
+      - manage-food-db:/var/opt/mssql
     networks:
       - manage-food-network
+
+volumes:
+  manage-food-db:
