@@ -17,7 +17,8 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop
       builder.ApplyEntityTypeConfig(seedData,
         typeof(CatalogueConfig),
         typeof(ProductConfig),
-        typeof(InventoryConfig));
+        typeof(InventoryConfig),
+        typeof(OrderConfig));
     }
   }
 }

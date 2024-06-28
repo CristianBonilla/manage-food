@@ -56,6 +56,10 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
       builder.HasOne(one => one.Catalogue)
         .WithMany(many => many.Products)
         .HasForeignKey(key => key.CatalogueId);
+      builder.HasMany(many => many.Orders)
+        .WithOne(one => one.Product)
+        .HasForeignKey(key => key.ProductId)
+        .OnDelete(DeleteBehavior.Cascade);
       builder.HasIndex(index => new { index.Name })
         .IsUnique();
       if (seedData is not null)
@@ -77,7 +81,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .HasPrecision(9, 2)
         .IsRequired();
       builder.Property(property => property.UnitType)
-        .HasConversion(unitType => unitType.Value, value => StringEnumeration.FromValue<UnitType>(value) ?? UnitType.Gram)
+        .HasConversion(unitType => unitType.Value, unitType => StringEnumeration.FromValue<UnitType>(unitType) ?? UnitType.Gram)
         .HasMaxLength(3)
         .IsUnicode(false)
         .IsRequired();
@@ -94,6 +98,29 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .OnDelete(DeleteBehavior.Cascade);
       if (seedData is not null)
         builder.HasData(seedData.FoodShop.Inventories.GetAll());
+    }
+  }
+
+  class OrderConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<OrderEntity>
+  {
+    public void Configure(EntityTypeBuilder<OrderEntity> builder)
+    {
+      builder.ToTable("Order", "dbo")
+        .HasKey(key => key.OrderId);
+      builder.Property(property => property.OrderId)
+        .HasDefaultValueSql("NEWID()");
+      builder.Property(property => property.Created)
+        .HasDefaultValueSql("GETUTCDATE()");
+      builder.Property(property => property.Version)
+        .IsRowVersion();
+      builder.HasOne(one => one.User)
+        .WithMany(many => many.Orders)
+        .HasForeignKey(key => key.UserId);
+      builder.HasOne(one => one.Product)
+        .WithMany(many => many.Orders)
+        .HasForeignKey(key => key.ProductId);
+      if (seedData is not null)
+        builder.HasData(seedData.FoodShop.Orders.GetAll());
     }
   }
 }

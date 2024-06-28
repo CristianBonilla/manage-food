@@ -9,5 +9,6 @@ namespace ManageFood.Domain.Entities.FoodShop
     public DateTimeOffset Created { get; set; }
     public byte[] Version { get; set; } = null!;
     public CatalogueEntity Catalogue { get; set; } = null!;
+    public ICollection<OrderEntity> Orders { get; set; } = [];
   }
 }

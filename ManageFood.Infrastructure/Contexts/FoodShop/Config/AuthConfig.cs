@@ -82,7 +82,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
     }
   }
 
-  class UserConfig : IEntityTypeConfiguration<UserEntity>
+  class UserConfig(ISeedData? seedData = null) : IEntityTypeConfiguration<UserEntity>
   {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
@@ -91,6 +91,12 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
       builder.Property(property => property.UserId)
         .HasDefaultValueSql("NEWID()");
       builder.Property(property => property.DocumentNumber)
+        .HasMaxLength(20)
+        .IsUnicode(false)
+        .IsRequired();
+      builder.Property(property => property.Mobile)
+        .HasMaxLength(20)
+        .IsUnicode(false)
         .IsRequired();
       builder.Property(property => property.Username)
         .HasMaxLength(100)
@@ -111,6 +117,10 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .HasMaxLength(50)
         .IsUnicode(false)
         .IsRequired();
+      builder.Property(property => property.IsActive)
+        .IsRequired();
+      builder.Property(property => property.Salt)
+        .IsRequired();
       builder.Property(property => property.Created)
         .HasDefaultValueSql("GETUTCDATE()");
       builder.Property(property => property.Version)
@@ -118,8 +128,14 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
       builder.HasOne(property => property.Role)
         .WithMany(many => many.Users)
         .HasForeignKey(key => key.RoleId);
-      builder.HasIndex(index => new { index.DocumentNumber, index.Username, index.Email })
+      builder.HasMany(many => many.Orders)
+        .WithOne(one => one.User)
+        .HasForeignKey(key => key.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
+      builder.HasIndex(index => new { index.DocumentNumber, index.Username, index.Email, index.Mobile })
         .IsUnique();
+      if (seedData is not null)
+        builder.HasData(seedData.Auth.Users.GetAll());
     }
   }
 }
