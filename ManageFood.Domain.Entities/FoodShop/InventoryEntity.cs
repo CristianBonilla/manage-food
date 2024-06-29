@@ -6,7 +6,6 @@ namespace ManageFood.Domain.Entities.FoodShop
   {
     public required Guid ProductId { get; set; }
     public required int Quantity { get; set; }
-    public required int QuantityAvailable { get; set; }
     public required decimal Unit {  get; set; }
     public required UnitType UnitType { get; set; }
     public required decimal Price { get; set; }

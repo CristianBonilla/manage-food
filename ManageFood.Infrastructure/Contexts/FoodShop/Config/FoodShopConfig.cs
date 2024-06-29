@@ -75,8 +75,6 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Config
         .HasKey(key => key.ProductId);
       builder.Property(property => property.Quantity)
         .IsRequired();
-      builder.Property(property => property.QuantityAvailable)
-        .IsRequired();
       builder.Property(property => property.Unit)
         .HasPrecision(9, 2)
         .IsRequired();
