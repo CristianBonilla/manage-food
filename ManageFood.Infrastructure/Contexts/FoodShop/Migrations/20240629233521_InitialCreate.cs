@@ -39,7 +39,6 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
           {
             ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
             Quantity = table.Column<int>(type: "int", nullable: false),
-            QuantityAvailable = table.Column<int>(type: "int", nullable: false),
             Unit = table.Column<decimal>(type: "decimal(9,2)", precision: 9, scale: 2, nullable: false),
             UnitType = table.Column<string>(type: "varchar(3)", unicode: false, maxLength: 3, nullable: false),
             Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
@@ -220,22 +219,22 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
       migrationBuilder.InsertData(
           schema: "dbo",
           table: "Inventory",
-          columns: new[] { "ProductId", "Created", "Price", "Quantity", "QuantityAvailable", "Unit", "UnitType" },
+          columns: new[] { "ProductId", "Created", "Price", "Quantity", "Unit", "UnitType" },
           values: new object[,]
           {
-                    { new Guid("0ab34369-9ea3-4153-97ae-099ebef7f746"), new DateTimeOffset(new DateTime(2024, 2, 10, 9, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 4400.5m, 24, 20, 500.2m, "G" },
-                    { new Guid("3bfd012b-734b-424b-8c38-31f550037db6"), new DateTimeOffset(new DateTime(2024, 2, 15, 20, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 2490.10m, 310, 310, 500m, "G" },
-                    { new Guid("3cbcffd4-60a8-4584-97a0-eacabf555ad8"), new DateTimeOffset(new DateTime(2024, 2, 18, 23, 17, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 17430.40m, 45, 43, 500m, "G" },
-                    { new Guid("67073233-c813-4646-ba42-06b7e7997fa9"), new DateTimeOffset(new DateTime(2024, 2, 21, 2, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 48250.50m, 19, 19, 1.3m, "Lt" },
-                    { new Guid("7124211b-ff28-41b6-8404-d111c0a7ddb3"), new DateTimeOffset(new DateTime(2024, 2, 18, 6, 10, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 55500m, 8, 7, 720.2m, "G" },
-                    { new Guid("8b0ce0e2-2850-4673-bc32-8cfd0554409b"), new DateTimeOffset(new DateTime(2024, 2, 14, 17, 15, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 9120.50m, 120, 68, 1000.8m, "G" },
-                    { new Guid("9037cc53-fa37-4dd6-8833-40d583fd2371"), new DateTimeOffset(new DateTime(2024, 2, 18, 21, 12, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 15167.50m, 13, 9, 250.5m, "G" },
-                    { new Guid("920c202d-4ed1-453d-8769-557f4e5d0f90"), new DateTimeOffset(new DateTime(2024, 2, 19, 3, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 5200.5m, 80, 71, 250.5m, "G" },
-                    { new Guid("96be3795-4827-4def-b766-6302e4ae3fef"), new DateTimeOffset(new DateTime(2024, 2, 19, 10, 5, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 7900m, 33, 11, 200m, "G" },
-                    { new Guid("9f15a35d-c294-471b-905f-e72d85538610"), new DateTimeOffset(new DateTime(2024, 2, 11, 10, 4, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 8990.50m, 10, 8, 220m, "G" },
-                    { new Guid("b1369640-650a-46f8-ad78-677690e222db"), new DateTimeOffset(new DateTime(2024, 2, 11, 2, 26, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 3250.44m, 66, 51, 340.5m, "G" },
-                    { new Guid("b323b549-dd2f-4fa5-aace-46239ed7f954"), new DateTimeOffset(new DateTime(2024, 2, 22, 9, 10, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 2720.80m, 50, 29, 400m, "Ml" },
-                    { new Guid("b3ce1679-ae8e-4f5b-9c22-0b672d7aab48"), new DateTimeOffset(new DateTime(2024, 2, 19, 20, 2, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 22000m, 29, 22, 7200m, "Ml" }
+                    { new Guid("0ab34369-9ea3-4153-97ae-099ebef7f746"), new DateTimeOffset(new DateTime(2024, 2, 10, 9, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 4400.5m, 24, 500.2m, "G" },
+                    { new Guid("3bfd012b-734b-424b-8c38-31f550037db6"), new DateTimeOffset(new DateTime(2024, 2, 15, 20, 11, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 2490.10m, 310, 500m, "G" },
+                    { new Guid("3cbcffd4-60a8-4584-97a0-eacabf555ad8"), new DateTimeOffset(new DateTime(2024, 2, 18, 23, 17, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 17430.40m, 45, 500m, "G" },
+                    { new Guid("67073233-c813-4646-ba42-06b7e7997fa9"), new DateTimeOffset(new DateTime(2024, 2, 21, 2, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 48250.50m, 19, 1.3m, "Lt" },
+                    { new Guid("7124211b-ff28-41b6-8404-d111c0a7ddb3"), new DateTimeOffset(new DateTime(2024, 2, 18, 6, 10, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 55500m, 8, 720.2m, "G" },
+                    { new Guid("8b0ce0e2-2850-4673-bc32-8cfd0554409b"), new DateTimeOffset(new DateTime(2024, 2, 14, 17, 15, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 9120.50m, 120, 1000.8m, "G" },
+                    { new Guid("9037cc53-fa37-4dd6-8833-40d583fd2371"), new DateTimeOffset(new DateTime(2024, 2, 18, 21, 12, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 15167.50m, 13, 250.5m, "G" },
+                    { new Guid("920c202d-4ed1-453d-8769-557f4e5d0f90"), new DateTimeOffset(new DateTime(2024, 2, 19, 3, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 5200.5m, 80, 250.5m, "G" },
+                    { new Guid("96be3795-4827-4def-b766-6302e4ae3fef"), new DateTimeOffset(new DateTime(2024, 2, 19, 10, 5, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 7900m, 33, 200m, "G" },
+                    { new Guid("9f15a35d-c294-471b-905f-e72d85538610"), new DateTimeOffset(new DateTime(2024, 2, 11, 10, 4, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 8990.50m, 10, 220m, "G" },
+                    { new Guid("b1369640-650a-46f8-ad78-677690e222db"), new DateTimeOffset(new DateTime(2024, 2, 11, 2, 26, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 3250.44m, 66, 340.5m, "G" },
+                    { new Guid("b323b549-dd2f-4fa5-aace-46239ed7f954"), new DateTimeOffset(new DateTime(2024, 2, 22, 9, 10, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 2720.80m, 50, 400m, "Ml" },
+                    { new Guid("b3ce1679-ae8e-4f5b-9c22-0b672d7aab48"), new DateTimeOffset(new DateTime(2024, 2, 19, 20, 2, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), 22000m, 29, 7200m, "Ml" }
           });
 
       migrationBuilder.InsertData(
@@ -299,7 +298,7 @@ namespace ManageFood.Infrastructure.Contexts.FoodShop.Migrations
           schema: "dbo",
           table: "User",
           columns: new[] { "UserId", "DocumentNumber", "Email", "Firstname", "IsActive", "Lastname", "Mobile", "Password", "RoleId", "Salt", "Username" },
-          values: new object[] { new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53"), "1023944678", "cristian10camilo95@gmail.com", "Cristian Camilo", true, "Bonilla", "+573163534451", "o4hTayQHtuHGqG8+SEcSJHvbaSazKKAsw+XcrEas7LaifS+jpLuf0VoPlHlHL6LTqIXQPKr7b+F2aF8Cp9piPw==", new Guid("d146b771-7df4-411f-8ccb-490b2d65d22f"), new byte[] { 163, 136, 83, 107, 36, 7, 182, 225, 198, 168, 111, 62, 72, 71, 18, 36, 123, 219, 105, 38, 179, 40, 160, 44, 195, 229, 220, 172, 70, 172, 236, 182 }, "chris__boni" });
+          values: new object[] { new Guid("c880a1fd-2c32-46cb-b744-a6fad6175a53"), "1023944678", "cristian10camilo95@gmail.com", "Cristian Camilo", true, "Bonilla", "+573163534451", "YFkPmMblk1zN27cI5lSDvIBiLrCXRBAI+MeF17esCFD+dOdffFtBocWmhEcFUIfsS0yMCjt4pgwKrZX0/ywq9Q==", new Guid("d146b771-7df4-411f-8ccb-490b2d65d22f"), new byte[] { 96, 89, 15, 152, 198, 229, 147, 92, 205, 219, 183, 8, 230, 84, 131, 188, 128, 98, 46, 176, 151, 68, 16, 8, 248, 199, 133, 215, 183, 172, 8, 80 }, "chris__boni" });
 
       migrationBuilder.InsertData(
           schema: "dbo",

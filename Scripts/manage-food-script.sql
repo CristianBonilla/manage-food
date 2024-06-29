@@ -1,4 +1,4 @@
-IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+﻿IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
 BEGIN
     CREATE TABLE [__EFMigrationsHistory] (
         [MigrationId] nvarchar(150) NOT NULL,
@@ -13,7 +13,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Catalogue] (
@@ -29,13 +29,12 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Inventory] (
         [ProductId] uniqueidentifier NOT NULL,
         [Quantity] int NOT NULL,
-        [QuantityAvailable] int NOT NULL,
         [Unit] decimal(9,2) NOT NULL,
         [UnitType] varchar(3) NOT NULL,
         [Price] decimal(10,2) NOT NULL,
@@ -48,7 +47,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Permission] (
@@ -65,7 +64,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Role] (
@@ -81,7 +80,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Product] (
@@ -100,7 +99,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[RolePermission] (
@@ -117,7 +116,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[User] (
@@ -142,7 +141,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE TABLE [dbo].[Order] (
@@ -160,7 +159,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'CatalogueId', N'Created', N'Description', N'Name') AND [object_id] = OBJECT_ID(N'[dbo].[Catalogue]'))
@@ -177,33 +176,33 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ProductId', N'Created', N'Price', N'Quantity', N'QuantityAvailable', N'Unit', N'UnitType') AND [object_id] = OBJECT_ID(N'[dbo].[Inventory]'))
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ProductId', N'Created', N'Price', N'Quantity', N'Unit', N'UnitType') AND [object_id] = OBJECT_ID(N'[dbo].[Inventory]'))
         SET IDENTITY_INSERT [dbo].[Inventory] ON;
-    EXEC(N'INSERT INTO [dbo].[Inventory] ([ProductId], [Created], [Price], [Quantity], [QuantityAvailable], [Unit], [UnitType])
-    VALUES (''0ab34369-9ea3-4153-97ae-099ebef7f746'', ''2024-02-10T09:11:00.0000000+03:00'', 4400.5, 24, 20, 500.2, ''G''),
-    (''3bfd012b-734b-424b-8c38-31f550037db6'', ''2024-02-15T20:11:00.0000000+03:00'', 2490.1, 310, 310, 500.0, ''G''),
-    (''3cbcffd4-60a8-4584-97a0-eacabf555ad8'', ''2024-02-18T23:17:00.0000000+03:00'', 17430.4, 45, 43, 500.0, ''G''),
-    (''67073233-c813-4646-ba42-06b7e7997fa9'', ''2024-02-21T02:00:00.0000000+03:00'', 48250.5, 19, 19, 1.3, ''Lt''),
-    (''7124211b-ff28-41b6-8404-d111c0a7ddb3'', ''2024-02-18T06:10:00.0000000+03:00'', 55500.0, 8, 7, 720.2, ''G''),
-    (''8b0ce0e2-2850-4673-bc32-8cfd0554409b'', ''2024-02-14T17:15:00.0000000+03:00'', 9120.5, 120, 68, 1000.8, ''G''),
-    (''9037cc53-fa37-4dd6-8833-40d583fd2371'', ''2024-02-18T21:12:00.0000000+03:00'', 15167.5, 13, 9, 250.5, ''G''),
-    (''920c202d-4ed1-453d-8769-557f4e5d0f90'', ''2024-02-19T03:00:00.0000000+03:00'', 5200.5, 80, 71, 250.5, ''G''),
-    (''96be3795-4827-4def-b766-6302e4ae3fef'', ''2024-02-19T10:05:00.0000000+03:00'', 7900.0, 33, 11, 200.0, ''G''),
-    (''9f15a35d-c294-471b-905f-e72d85538610'', ''2024-02-11T10:04:00.0000000+03:00'', 8990.5, 10, 8, 220.0, ''G''),
-    (''b1369640-650a-46f8-ad78-677690e222db'', ''2024-02-11T02:26:00.0000000+03:00'', 3250.44, 66, 51, 340.5, ''G''),
-    (''b323b549-dd2f-4fa5-aace-46239ed7f954'', ''2024-02-22T09:10:00.0000000+03:00'', 2720.8, 50, 29, 400.0, ''Ml''),
-    (''b3ce1679-ae8e-4f5b-9c22-0b672d7aab48'', ''2024-02-19T20:02:00.0000000+03:00'', 22000.0, 29, 22, 7200.0, ''Ml'')');
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ProductId', N'Created', N'Price', N'Quantity', N'QuantityAvailable', N'Unit', N'UnitType') AND [object_id] = OBJECT_ID(N'[dbo].[Inventory]'))
+    EXEC(N'INSERT INTO [dbo].[Inventory] ([ProductId], [Created], [Price], [Quantity], [Unit], [UnitType])
+    VALUES (''0ab34369-9ea3-4153-97ae-099ebef7f746'', ''2024-02-10T09:11:00.0000000+03:00'', 4400.5, 24, 500.2, ''G''),
+    (''3bfd012b-734b-424b-8c38-31f550037db6'', ''2024-02-15T20:11:00.0000000+03:00'', 2490.1, 310, 500.0, ''G''),
+    (''3cbcffd4-60a8-4584-97a0-eacabf555ad8'', ''2024-02-18T23:17:00.0000000+03:00'', 17430.4, 45, 500.0, ''G''),
+    (''67073233-c813-4646-ba42-06b7e7997fa9'', ''2024-02-21T02:00:00.0000000+03:00'', 48250.5, 19, 1.3, ''Lt''),
+    (''7124211b-ff28-41b6-8404-d111c0a7ddb3'', ''2024-02-18T06:10:00.0000000+03:00'', 55500.0, 8, 720.2, ''G''),
+    (''8b0ce0e2-2850-4673-bc32-8cfd0554409b'', ''2024-02-14T17:15:00.0000000+03:00'', 9120.5, 120, 1000.8, ''G''),
+    (''9037cc53-fa37-4dd6-8833-40d583fd2371'', ''2024-02-18T21:12:00.0000000+03:00'', 15167.5, 13, 250.5, ''G''),
+    (''920c202d-4ed1-453d-8769-557f4e5d0f90'', ''2024-02-19T03:00:00.0000000+03:00'', 5200.5, 80, 250.5, ''G''),
+    (''96be3795-4827-4def-b766-6302e4ae3fef'', ''2024-02-19T10:05:00.0000000+03:00'', 7900.0, 33, 200.0, ''G''),
+    (''9f15a35d-c294-471b-905f-e72d85538610'', ''2024-02-11T10:04:00.0000000+03:00'', 8990.5, 10, 220.0, ''G''),
+    (''b1369640-650a-46f8-ad78-677690e222db'', ''2024-02-11T02:26:00.0000000+03:00'', 3250.44, 66, 340.5, ''G''),
+    (''b323b549-dd2f-4fa5-aace-46239ed7f954'', ''2024-02-22T09:10:00.0000000+03:00'', 2720.8, 50, 400.0, ''Ml''),
+    (''b3ce1679-ae8e-4f5b-9c22-0b672d7aab48'', ''2024-02-19T20:02:00.0000000+03:00'', 22000.0, 29, 7200.0, ''Ml'')');
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ProductId', N'Created', N'Price', N'Quantity', N'Unit', N'UnitType') AND [object_id] = OBJECT_ID(N'[dbo].[Inventory]'))
         SET IDENTITY_INSERT [dbo].[Inventory] OFF;
 END;
 GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'PermissionId', N'Created', N'DisplayName', N'Name', N'Order') AND [object_id] = OBJECT_ID(N'[dbo].[Permission]'))
@@ -220,7 +219,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'RoleId', N'Created', N'DisplayName', N'Name') AND [object_id] = OBJECT_ID(N'[dbo].[Role]'))
@@ -235,7 +234,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ProductId', N'CatalogueId', N'Created', N'Description', N'Name') AND [object_id] = OBJECT_ID(N'[dbo].[Product]'))
@@ -261,7 +260,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'PermissionId', N'RoleId', N'Created') AND [object_id] = OBJECT_ID(N'[dbo].[RolePermission]'))
@@ -280,13 +279,13 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'UserId', N'DocumentNumber', N'Email', N'Firstname', N'IsActive', N'Lastname', N'Mobile', N'Password', N'RoleId', N'Salt', N'Username') AND [object_id] = OBJECT_ID(N'[dbo].[User]'))
         SET IDENTITY_INSERT [dbo].[User] ON;
     EXEC(N'INSERT INTO [dbo].[User] ([UserId], [DocumentNumber], [Email], [Firstname], [IsActive], [Lastname], [Mobile], [Password], [RoleId], [Salt], [Username])
-    VALUES (''c880a1fd-2c32-46cb-b744-a6fad6175a53'', ''1023944678'', ''cristian10camilo95@gmail.com'', ''Cristian Camilo'', CAST(1 AS bit), ''Bonilla'', ''+573163534451'', ''o4hTayQHtuHGqG8+SEcSJHvbaSazKKAsw+XcrEas7LaifS+jpLuf0VoPlHlHL6LTqIXQPKr7b+F2aF8Cp9piPw=='', ''d146b771-7df4-411f-8ccb-490b2d65d22f'', 0xA388536B2407B6E1C6A86F3E484712247BDB6926B328A02CC3E5DCAC46ACECB6, ''chris__boni'')');
+    VALUES (''c880a1fd-2c32-46cb-b744-a6fad6175a53'', ''1023944678'', ''cristian10camilo95@gmail.com'', ''Cristian Camilo'', CAST(1 AS bit), ''Bonilla'', ''+573163534451'', ''YFkPmMblk1zN27cI5lSDvIBiLrCXRBAI+MeF17esCFD+dOdffFtBocWmhEcFUIfsS0yMCjt4pgwKrZX0/ywq9Q=='', ''d146b771-7df4-411f-8ccb-490b2d65d22f'', 0x60590F98C6E5935CCDDBB708E65483BC80622EB097441008F8C785D7B7AC0850, ''chris__boni'')');
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'UserId', N'DocumentNumber', N'Email', N'Firstname', N'IsActive', N'Lastname', N'Mobile', N'Password', N'RoleId', N'Salt', N'Username') AND [object_id] = OBJECT_ID(N'[dbo].[User]'))
         SET IDENTITY_INSERT [dbo].[User] OFF;
 END;
@@ -294,7 +293,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'OrderId', N'Created', N'ProductId', N'UserId') AND [object_id] = OBJECT_ID(N'[dbo].[Order]'))
@@ -309,7 +308,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_Catalogue_Name] ON [dbo].[Catalogue] ([Name]);
@@ -318,7 +317,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE INDEX [IX_Order_ProductId] ON [dbo].[Order] ([ProductId]);
@@ -327,7 +326,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE INDEX [IX_Order_UserId] ON [dbo].[Order] ([UserId]);
@@ -336,7 +335,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_Permission_Name_DisplayName] ON [dbo].[Permission] ([Name], [DisplayName]);
@@ -345,7 +344,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE INDEX [IX_Product_CatalogueId] ON [dbo].[Product] ([CatalogueId]);
@@ -354,7 +353,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_Product_Name] ON [dbo].[Product] ([Name]);
@@ -363,7 +362,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_Role_Name_DisplayName] ON [dbo].[Role] ([Name], [DisplayName]);
@@ -372,7 +371,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE INDEX [IX_RolePermission_PermissionId] ON [dbo].[RolePermission] ([PermissionId]);
@@ -381,7 +380,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_User_DocumentNumber_Username_Email_Mobile] ON [dbo].[User] ([DocumentNumber], [Username], [Email], [Mobile]);
@@ -390,7 +389,7 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     CREATE INDEX [IX_User_RoleId] ON [dbo].[User] ([RoleId]);
@@ -399,13 +398,14 @@ GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240628075311_InitialCreate'
+    WHERE [MigrationId] = N'20240629233521_InitialCreate'
 )
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20240628075311_InitialCreate', N'8.0.4');
+    VALUES (N'20240629233521_InitialCreate', N'8.0.4');
 END;
 GO
 
 COMMIT;
 GO
+
