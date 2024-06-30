@@ -17,6 +17,9 @@ namespace ManageFood.API.Modules
       builder.RegisterType<InventoryRepository>()
         .As<IInventoryRepository>()
         .InstancePerLifetimeScope();
+      builder.RegisterType<OrderRepository>()
+        .As<IOrderRepository>()
+        .InstancePerLifetimeScope();
     }
   }
 }
