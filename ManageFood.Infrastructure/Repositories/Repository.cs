@@ -5,7 +5,7 @@ using ManageFood.Contracts.Repository;
 
 namespace ManageFood.Infrastructure.Repositories
 {
-  public class Repository<TContext, TEntity>(IRepositoryContext<TContext> context) : IRepository<TContext, TEntity>
+  public abstract class Repository<TContext, TEntity>(IRepositoryContext<TContext> context) : IRepository<TContext, TEntity>
     where TContext : DbContext
     where TEntity : class
   {
@@ -16,7 +16,7 @@ namespace ManageFood.Infrastructure.Repositories
 
     public IEnumerable<TEntity> CreateRange(IEnumerable<TEntity> entities)
     {
-      return Range();
+      return [.. Range()];
 
       IEnumerable<TEntity> Range()
       {
@@ -37,7 +37,7 @@ namespace ManageFood.Infrastructure.Repositories
 
     public IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities)
     {
-      return Range();
+      return [.. Range()];
 
       IEnumerable<TEntity> Range()
       {
@@ -58,7 +58,7 @@ namespace ManageFood.Infrastructure.Repositories
 
     public IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities)
     {
-      return Range();
+      return [.. Range()];
 
       IEnumerable<TEntity> Range()
       {
@@ -91,6 +91,7 @@ namespace ManageFood.Infrastructure.Repositories
     {
       if (navigations.Length == 0)
         return _entitySet;
+
       var querySet = _entitySet.AsQueryable();
       foreach (var expression in navigations)
         querySet = querySet.Include(expression);

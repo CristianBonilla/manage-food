@@ -4,7 +4,7 @@ using ManageFood.Contracts.Repository;
 
 namespace ManageFood.Infrastructure.Repositories
 {
-  public class RepositoryContext<TContext>(TContext context) : IRepositoryContext<TContext> where TContext : DbContext
+  public abstract class RepositoryContext<TContext>(TContext context) : IRepositoryContext<TContext> where TContext : DbContext
   {
     readonly TContext _context = context;
     bool _disposed = false;
